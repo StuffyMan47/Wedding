@@ -1,0 +1,53 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    font-family: 'Roboto', sans-serif;
+    background-color: #F5F5F5;
+    border-collapse: separate;
+}
+
+    /* Define the table header styles */
+    table th {
+        background-color: #0089fe;
+        color: #FFFFFF;
+        font-weight: bold;
+        padding: 10px;
+        text-align: left;
+        border: none;
+    }
+.table tbody tr:last-child td:first-child {
+    border-radius: 0 0 0 20px;
+}
+
+.table tbody tr:last-child td:last-child {
+    border-radius: 0 0 20px 0;
+}
+.table thead tr th:first-child {
+    border-radius: 20px 0 0 0;
+}
+
+.table thead tr th:last-child {
+    border-radius: 0 20px 0 0;
+}
+
+    /* Define the table row styles */
+    table tr:nth-child(even) {
+        background-color: #FFFFFF;
+    }
+
+    table tr:nth-child(odd) {
+        background-color: #E0E0E0;
+    }
+
+    /* Define the table cell styles */
+    table td {
+        border: 1px solid #CCCCCC;
+        padding: 10px;
+    }
+
+    /* Define the table hover effect */
+    table tr:hover {
+        background-color: #75befc;
+        color: #FFFFFF;
+    }

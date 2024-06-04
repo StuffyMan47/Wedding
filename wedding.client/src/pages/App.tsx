@@ -1,7 +1,11 @@
+/* eslint-disable prefer-const */
 import { useEffect, useState } from 'react';
 import '../app/styles/App.css';
+import '../app/styles/table-css.css';
 import { ResponsiveAppBar } from '../widgets/Header';
-import GuestTable from '../widgets/Table';
+import MaterialTable from '../widgets/Table';
+import { GuestListModel } from '../entities/guest/model/guest-model';
+import { useGuestList } from '../entities/guest/api/guest-list-api';
 
 interface Forecast {
     date: string;
@@ -10,12 +14,51 @@ interface Forecast {
     summary: string;
 }
 
+const fakeData: GuestListModel[] = [
+    {
+        id: 1,
+        isCome: true,
+        name: 'Давид',
+        coupleName: 'Дима',
+    },
+    {
+        id: 2,
+        isCome: true,
+        name: 'Айдар',
+        coupleName: 'Камилла',
+    },
+    {
+        id: 3,
+        isCome: true,
+        name: 'Костя',
+    }
+]
+
 function App() {
     const [forecasts, setForecasts] = useState<Forecast[]>();
+    const [guestList, setGuestList] = useState<GuestListModel[]>();
+    const {
+        data: guestData,
+        isLoading: isPostsLoading,
+        isError: isPostsFailed,
+    } = useGuestList();
 
     useEffect(() => {
+
+        console.log(isPostsLoading);
+        console.log(isPostsFailed)
+        console.log(guestList)
         populateWeatherData();
     }, []);
+
+    useEffect(() => {
+        let test = guestData
+        console.log(test)
+        setGuestList(!(guestData === undefined) ? guestData.data:fakeData)
+        console.log(guestData);
+        setGuestList(guestData)
+        console.log(guestList)
+    }, [guestData]);
 
     const contents = forecasts === undefined
         ? <p><em>Loading... Please refresh once the ASP.NET backend has started. See <a href="https://aka.ms/jspsintegrationreact">https://aka.ms/jspsintegrationreact</a> for more details.</em></p>
@@ -41,17 +84,22 @@ function App() {
                     )}
                 </tbody>
             </table>
-            <GuestTable />
+            
         </div>;
 
     return (
         <><div>
             <ResponsiveAppBar />
-        </div><div>
+        </div>
+            <div>
                 <h1 id="tabelLabel">Weather forecast</h1>
                 <p>This component demonstrates fetching data from the server.</p>
                 {contents}
-            </div></>
+            </div>
+            <div>
+                <MaterialTable data={!(guestData === undefined) ? guestList! : fakeData}/>
+            </div>
+        </>
     );
 
     async function populateWeatherData() {

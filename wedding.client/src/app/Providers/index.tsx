@@ -6,7 +6,7 @@ export function Provider() {
     return (
         <QueryClientProvider>
             <BrowserRouter>
-            <App/>
+                <App/>
             </BrowserRouter>
         </QueryClientProvider>
     )

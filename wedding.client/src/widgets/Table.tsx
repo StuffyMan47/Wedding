@@ -7,53 +7,47 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { GuestListModel } from '../entities/guest/model/guest-model';
 import { useEffect, useState } from 'react';
-import { useGuestList } from '../entities/guest/api/guest-list-api';
+import '../app/styles/App.css'
+//import { List } from '@mui/material';
 
-export default function GuestTable() {
+interface Props {
+    data: Array<GuestListModel>;
+}
 
-    const [guests, setGuests] = useState<GuestListModel[]>();
+const MaterialTable: React.FC<Props> = ({ data }) => {
+    const [rows, setRows] = useState<Array<GuestListModel>>([]);
 
-    const { data: guestList } = useGuestList();
-    //getGuestsList()
-    setGuests(guestList)
     useEffect(() => {
-        setGuests(guestList);
-    }, []);
-
-    //async function getGuestsList() {
-    //    const response = await fetch('/api/Guests/get-guest-list');
-    //    const data = await response.json();
-    //    setGuests(data);
-    //}
+        setRows(data);
+    }, [data]);
+    
     return (
         <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} aria-label=" ÚÓ ÔË‰∏Ú">
-                <TableHead>
-                    {/*<TableRow>*/}
-                    {/*    <TableCell>Dessert (100g serving)</TableCell>*/}
-                    {/*    <TableCell align="left" >Calories</TableCell>*/}
-                    {/*    <TableCell align="left">Fat&nbsp;(g)</TableCell>*/}
-                    {/*    <TableCell align="left">Carbs&nbsp;(g)</TableCell>*/}
-                    {/*    <TableCell align="left">Protein&nbsp;(g)</TableCell>*/}
-                    {/*</TableRow>*/}
-                </TableHead>
-                <TableBody>
-                    {guests!.map((row) => (
-                        <TableRow
-                            key={row.name}
-                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                        >
-                            <TableCell component="th" scope="row">
-                                {row.name}
-                            </TableCell>
-                            <TableCell align="right">{row.name}</TableCell>
-                            <TableCell align="right">{row.coupleName}</TableCell>
-                            <TableCell align="right">{row.isCome}</TableCell>
-                        </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
-    );
+            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <TableHead>
+                <TableRow>
+                    <TableCell align="right">Id</TableCell>
+                        <TableCell align="right">Name</TableCell>
+                        <TableCell align="right">Is Come</TableCell>
+                        <TableCell align="right">Couple Name</TableCell>
+                </TableRow>
+            </TableHead>
+            <TableBody>
+                {rows.map((row) => (
+                    <TableRow
+                        key={row.id}
+                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                    >
+                        <TableCell align="right">{row.id}</TableCell>
+                        <TableCell align="right">{row.name}</TableCell>
+                        <TableCell align="right">{row.isCome ? "–ü—Ä–∏–¥—É—Ç" : "–ù–µ –ø—Ä–∏–¥—É—Ç"}</TableCell>
+                        <TableCell align="right">{row.coupleName}</TableCell>
+                    </TableRow>
+                ))}
+            </TableBody>
+        </Table>
+            </TableContainer >
+  );
+};
 
-}
+export default MaterialTable;

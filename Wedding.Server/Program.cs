@@ -17,6 +17,15 @@ namespace Wedding.Server
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerBuilder();
+            builder.Services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(policy =>
+                {
+                    policy.WithOrigins("https://localhost:5173");
+                    policy.AllowAnyHeader();
+                    policy.AllowAnyMethod();
+                });
+            });
             builder.Services.AddDbContext<ApplicationDbContext>(
                 options =>
                 {
@@ -27,6 +36,8 @@ namespace Wedding.Server
             builder.Services.AddApplication();
 
             var app = builder.Build();
+
+            app.UseCors();
 
             app.UseDefaultFiles();
             app.UseStaticFiles();

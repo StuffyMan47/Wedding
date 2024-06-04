@@ -11,8 +11,7 @@
   <ItemGroup>
     <Folder Include="src\entities\guest\api\" />
     <Folder Include="src\features\" />
-    <Folder Include="src\shared\api\main\core\" />
-    <Folder Include="src\shared\api\main\models\" />
+    <Folder Include="src\shared\api\" />
     <Folder Include="src\shared\hooks\" />
     <Folder Include="src\shared\ui\" />
   </ItemGroup>
