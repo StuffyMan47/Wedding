@@ -34,9 +34,12 @@ const fakeData: GuestListModel[] = [
     }
 ]
 
+const date = new Date(2024, 7, 3, 16, 0);
+
 function App() {
     const [forecasts, setForecasts] = useState<Forecast[]>();
     const [guestList, setGuestList] = useState<GuestListModel[]>();
+    const [timeLeft, setTimeLeft] = useState<Date>();
     const {
         data: guestData,
         isLoading: isLoading,

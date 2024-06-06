@@ -13,7 +13,7 @@ import AdbIcon from '@mui/icons-material/Adb';
 import * as React from 'react';
 import { useState } from 'react';
 
-const pages = ['Products', 'Pricing', 'Blog'];
+const pages = ['Когда', 'Где', 'Вопросы'];
 
 export function ResponsiveAppBar() {
         const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
