@@ -3,13 +3,12 @@ import { useQuery } from "@tanstack/react-query"
 import axios from "axios";
 
 export const guestKeys = {
-    root: ['guest'],
-    guestList: () => [...guestKeys.root, 'guestList'],
+    root: ['guests'],
+    guestList: () => [...guestKeys.root, 'guest-list'],
 }
 
-
-export function useGuestList() {
-    const resp = useQuery({
+export const useGuestList = () => {
+    return useQuery({
         queryKey: guestKeys.guestList(),
         queryFn: async () => {
             const { data } = await axios.get(
@@ -17,6 +16,5 @@ export function useGuestList() {
             );
             return data;
         },
-    })
-    return resp;
-}
+    });
+};

@@ -39,26 +39,27 @@ function App() {
     const [guestList, setGuestList] = useState<GuestListModel[]>();
     const {
         data: guestData,
-        isLoading: isPostsLoading,
-        isError: isPostsFailed,
+        isLoading: isLoading,
+        //isError: isFailed,
+        //error: err,
     } = useGuestList();
 
     useEffect(() => {
 
-        console.log(isPostsLoading);
-        console.log(isPostsFailed)
-        console.log(guestList)
+
         populateWeatherData();
     }, []);
 
     useEffect(() => {
-        let test = guestData
-        console.log(test)
-        setGuestList(!(guestData === undefined) ? guestData.data:fakeData)
-        console.log(guestData);
-        setGuestList(guestData)
-        console.log(guestList)
-    }, [guestData]);
+
+        if (guestData === undefined) {
+            setGuestList(fakeData)
+        }
+        else {
+            setGuestList(guestData.data)
+        }
+
+    }, [guestData, isLoading]);
 
     const contents = forecasts === undefined
         ? <p><em>Loading... Please refresh once the ASP.NET backend has started. See <a href="https://aka.ms/jspsintegrationreact">https://aka.ms/jspsintegrationreact</a> for more details.</em></p>
