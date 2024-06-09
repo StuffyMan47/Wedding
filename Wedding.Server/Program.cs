@@ -21,7 +21,8 @@ namespace Wedding.Server
             {
                 options.AddDefaultPolicy(policy =>
                 {
-                    policy.WithOrigins("https://localhost:5173");
+                    policy.AllowAnyOrigin();
+                    //policy.WithOrigins("https://localhost:5173");
                     policy.AllowAnyHeader();
                     policy.AllowAnyMethod();
                 });
