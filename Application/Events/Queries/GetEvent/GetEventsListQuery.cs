@@ -13,7 +13,7 @@ public class GetEventsListQueryHandler(BaseServicePool baseServicePool) : IReque
     public async Task<Result<List<EventDto>>> Handle(GetEventsListQuery request, CancellationToken cancellationToken) 
     {
         var result = await baseServicePool.DbContext.Events
-            .Select(x=> new EventDto { Date = x.Date, Description = x.Description, Newlyweds = x.Newlyweds, PlaceName = x.Place.Name })
+            .Select(x=> new EventDto { Date = x.Date, Description = x.Description, Newlyweds = x.Newlyweds, PlaseInfo = x.Place })
             .ToListAsync(cancellationToken);
 
         return Result<List<EventDto>>.Success(result);

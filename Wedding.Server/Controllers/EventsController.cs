@@ -12,13 +12,13 @@ namespace Wedding.Server.Controllers;
 
 public class EventsController(IMediator mediator) : BaseApiController(mediator)
 {
-    //[HttpGet("{id:long}")]
-    //[ProducesResponseType(typeof(BaseApiResponseModel<EventDto>), 200)]
-    //public async Task<IActionResult> GetEvent(long id)
-    //{
-    //    var result = await Mediator.Send(new GetGuestNameByIdQuery(id));
-    //    return FromResult(result);
-    //}
+    [HttpGet("get-current-event")]
+    [ProducesResponseType(typeof(BaseApiResponseModel<EventDto>), 200)]
+    public async Task<IActionResult> GetEvent(long id)
+    {
+        var result = await Mediator.Send(new GetEventByGuestIdQuery(id));
+        return FromResult(result);
+    }
 
     [HttpGet("get-events-list")]
     [ProducesResponseType(typeof(BaseApiResponseModel<List<EventDto>>), 200)]
