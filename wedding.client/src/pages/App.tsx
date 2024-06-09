@@ -3,19 +3,15 @@ import { useEffect, useState } from 'react';
 import '../app/styles/App.css';
 import '../app/styles/table-css.css';
 import { ResponsiveAppBar } from '../widgets/Header';
-import MaterialTable from '../widgets/Table';
+//import MaterialTable from '../widgets/Table';
 import { GuestListModel } from '../entities/guest/model/guest-model';
 import { useGuestList } from '../entities/guest/api/guest-list-api';
 import { YMaps, Map, Placemark } from '@pbe/react-yandex-maps';
 //import { useCurrentEvent } from '../entities/guest/api/get-current-event-api';
 import CountdownTimer from '../widgets/CountdownTimer';
+import CircleLine from '../widgets/Colors';
 
-interface Forecast {
-    date: string;
-    temperatureC: number;
-    temperatureF: number;
-    summary: string;
-}
+
 
 const fakeData: GuestListModel[] = [
     {
@@ -40,7 +36,6 @@ const fakeData: GuestListModel[] = [
 const date = new Date(2024, 7, 3, 16, 0);
 
 function App() {
-    const [forecasts, setForecasts] = useState<Forecast[]>();
     const [guestList, setGuestList] = useState<GuestListModel[]>();
     const {
         data: guestListData,
@@ -56,9 +51,6 @@ function App() {
     //    //error: err,
     //} = useCurrentEvent(1);
 
-    useEffect(() => {
-        populateWeatherData();
-    }, []);
 
     useEffect(() => {
 
@@ -71,44 +63,14 @@ function App() {
 
     }, [guestList, isLoading]);
 
-    const contents = forecasts === undefined
-        ? <p><em>Loading... Please refresh once the ASP.NET backend has started. See <a href="https://aka.ms/jspsintegrationreact">https://aka.ms/jspsintegrationreact</a> for more details.</em></p>
-        :
-        <div>
-            <table className="table table-striped" aria-labelledby="tabelLabel">
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Temp. (C)</th>
-                        <th>Temp. (F)</th>
-                        <th>Summary</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {forecasts.map(forecast =>
-                        <tr key={forecast.date}>
-                            <td>{forecast.date}</td>
-                            <td>{forecast.temperatureC}</td>
-                            <td>{forecast.temperatureF}</td>
-                            <td>{forecast.summary}</td>
-                        </tr>
-                    )}
-                </tbody>
-            </table>
-            
-        </div>;
+
 
     return (
         <><div>
             <ResponsiveAppBar />
         </div>
             <div>
-                <h1 id="tabelLabel">Weather forecast</h1>
-                <p>This component demonstrates fetching data from the server.</p>
-                {contents}
-            </div>
-            <div>
-                <MaterialTable data={!(guestList === undefined) ? guestList! : fakeData}/>
+                <h1 className="centered-text">Один день в этом году будет для нас особенным и мы хотим провести его в кругу близких и друзей. С большим удовольствием приглашаем вас на знаменательный праздник - нашу свадьбу!</h1>
             </div>
             <YMaps>
                 <div>
@@ -126,14 +88,11 @@ function App() {
             <div>
                 <CountdownTimer targetDate={date} />
             </div>
+            <div>
+                <CircleLine />
+            </div>
         </>
     );
-
-    async function populateWeatherData() {
-        const response = await fetch('weatherforecast');
-        const data = await response.json();
-        setForecasts(data);
-    }
 }
 
 export default App;
