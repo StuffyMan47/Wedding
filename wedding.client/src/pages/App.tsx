@@ -6,6 +6,9 @@ import { ResponsiveAppBar } from '../widgets/Header';
 import MaterialTable from '../widgets/Table';
 import { GuestListModel } from '../entities/guest/model/guest-model';
 import { useGuestList } from '../entities/guest/api/guest-list-api';
+import { YMaps, Map, Placemark } from '@pbe/react-yandex-maps';
+//import { useCurrentEvent } from '../entities/guest/api/get-current-event-api';
+import CountdownTimer from '../widgets/CountdownTimer';
 
 interface Forecast {
     date: string;
@@ -39,30 +42,34 @@ const date = new Date(2024, 7, 3, 16, 0);
 function App() {
     const [forecasts, setForecasts] = useState<Forecast[]>();
     const [guestList, setGuestList] = useState<GuestListModel[]>();
-    const [timeLeft, setTimeLeft] = useState<Date>();
     const {
-        data: guestData,
+        data: guestListData,
         isLoading: isLoading,
         //isError: isFailed,
         //error: err,
     } = useGuestList();
+    
+    //const {
+    //    data: eventInfo,
+    //    //isLoading: isLoading,
+    //    //isError: isFailed,
+    //    //error: err,
+    //} = useCurrentEvent(1);
 
     useEffect(() => {
-
-
         populateWeatherData();
     }, []);
 
     useEffect(() => {
 
-        if (guestData === undefined) {
+        if (guestListData === undefined) {
             setGuestList(fakeData)
         }
         else {
-            setGuestList(guestData.data)
+            setGuestList(guestListData.data)
         }
 
-    }, [guestData, isLoading]);
+    }, [guestList, isLoading]);
 
     const contents = forecasts === undefined
         ? <p><em>Loading... Please refresh once the ASP.NET backend has started. See <a href="https://aka.ms/jspsintegrationreact">https://aka.ms/jspsintegrationreact</a> for more details.</em></p>
@@ -101,7 +108,23 @@ function App() {
                 {contents}
             </div>
             <div>
-                <MaterialTable data={!(guestData === undefined) ? guestList! : fakeData}/>
+                <MaterialTable data={!(guestList === undefined) ? guestList! : fakeData}/>
+            </div>
+            <YMaps>
+                <div>
+                    <a href="https://vremenagodansk.ru/">Времена года</a>
+                    <Map
+                    
+                        defaultState={{ center: [56.101230, 54.296862], zoom: 15, controls: ["zoomControl", "fullscreenControl"] }}
+                        style={{ width: '100%', height: '400px' }}
+                        modules={["control.ZoomControl", "control.FullscreenControl"]}
+                    >
+                        <Placemark modules={["geoObject.addon.balloon"]} geometry={[56.101230, 54.296862]} properties={{ balloonContentBody: `Времена года` }} />
+                    </Map>
+                </div>
+            </YMaps>
+            <div>
+                <CountdownTimer targetDate={date} />
             </div>
         </>
     );
