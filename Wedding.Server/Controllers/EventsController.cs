@@ -3,8 +3,10 @@ using Application.Events.Commands.AddEvent;
 using Application.Events.Queries.GetEvent;
 using Application.Guests.Commands.AddGuest;
 using Application.Guests.Queries.GetGuestNames;
+using Application.Photos.Queries.GetPhoto;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
 using Wedding.Server.Controllers.Base;
 using Wedding.Server.Models;
 
@@ -34,5 +36,14 @@ public class EventsController(IMediator mediator) : BaseApiController(mediator)
     {
         var result = await Mediator.Send(request);
         return FromResult(result);
+    }
+
+    [HttpGet("get-photo")]
+    [ProducesResponseType(typeof(BaseApiResponseModel<FileStreamResult>), 200)]
+    public async Task<IActionResult> GetPhoto(long EventId)
+    {
+        var image = await Mediator.Send(new GetPhotoQuery(EventId));
+        var result = File(image, "image/jpeg");
+        return result;
     }
 }

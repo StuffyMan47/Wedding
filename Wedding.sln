@@ -13,7 +13,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastru
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{8E9327C3-D6D2-46EC-BC7E-8A6DF63AA408}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{91EA8CBD-CF38-4D63-86BB-F12CB30083C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{91EA8CBD-CF38-4D63-86BB-F12CB30083C6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{9A985769-9EC5-4887-8637-3FFF81B313AA}"
+	ProjectSection(SolutionItems) = preProject
+		C:\Users\Master\Downloads\IMG_9481.jpg = C:\Users\Master\Downloads\IMG_9481.jpg
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -52,6 +57,7 @@ Global
 		{655A9A34-40DB-47DC-9FCC-FE89FB40522F} = {E000E557-9E81-4994-8BFD-FC56D0B201DB}
 		{8E9327C3-D6D2-46EC-BC7E-8A6DF63AA408} = {E000E557-9E81-4994-8BFD-FC56D0B201DB}
 		{91EA8CBD-CF38-4D63-86BB-F12CB30083C6} = {E000E557-9E81-4994-8BFD-FC56D0B201DB}
+		{9A985769-9EC5-4887-8637-3FFF81B313AA} = {E000E557-9E81-4994-8BFD-FC56D0B201DB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ECCABA48-39EB-40BE-AB64-8E9FB457220E}

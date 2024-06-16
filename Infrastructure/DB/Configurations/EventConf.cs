@@ -12,8 +12,14 @@ public class EventConf : IEntityTypeConfiguration<Event>
         builder
             .HasOne(x => x.Place)
             .WithMany(x => x.Events);
+
         builder
             .HasMany(x => x.Guests)
             .WithOne(x => x.Event);
+
+        builder
+            .HasOne(x => x.Photo)
+            .WithOne(x => x.Event)
+            .HasForeignKey<Event>(x => x.PhotoId);
     }
 }

@@ -12,7 +12,7 @@ public class GetEventByGuestIdQueryHandler(BaseServicePool baseServicePool) : IR
 {
     public async Task<Result<EventDto>> Handle(GetEventByGuestIdQuery request, CancellationToken cancellationToken) 
     {
-        var test = await baseServicePool.DbContext.Guests
+        var result = await baseServicePool.DbContext.Guests
             .Where(x=>x.Id==request.id)
             .Select(x => new EventDto {
                 Date = x.Event.Date,
@@ -21,6 +21,6 @@ public class GetEventByGuestIdQueryHandler(BaseServicePool baseServicePool) : IR
                 PlaseInfo = x.Event.Place,
             }).FirstOrDefaultAsync();
 
-        return Result<EventDto>.Success(test);
+        return Result<EventDto>.Success(result);
     }
 }

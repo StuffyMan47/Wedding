@@ -1,4 +1,5 @@
 ﻿using Domain.Common;
+using Domain.Enums;
 
 namespace Domain.Entities;
 public class Guest: BaseEntity
@@ -8,6 +9,7 @@ public class Guest: BaseEntity
     public bool NeedTransfer {  get; set; }
     public string? CoupleName { get; set; }
     public long EventId { get; set; }
+    public List<Alcohol> Alcohol { get; set; } = [];
 
     public Event Event { get; set; }
 }

@@ -8,6 +8,8 @@ public class Event: BaseEntity
     public string Newlyweds { get; set; } = string.Empty;
     public long PlaceId { get; set; }
 
+    public long PhotoId {  get; set; }
+    public Photo Photo {  get; set; }
     public List<Guest> Guests { get; set; } = [];
     public Place Place { get; set; }
 }

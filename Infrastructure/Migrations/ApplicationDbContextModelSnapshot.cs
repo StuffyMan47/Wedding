@@ -44,6 +44,9 @@ namespace Infrastructure.Migrations
                     b.Property<long>("OwnerId")
                         .HasColumnType("bigint");
 
+                    b.Property<long>("PhotoId")
+                        .HasColumnType("bigint");
+
                     b.Property<long>("PlaceId")
                         .HasColumnType("bigint");
 
@@ -61,6 +64,10 @@ namespace Infrastructure.Migrations
                         .HasColumnType("bigint");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<int[]>("Alcohol")
+                        .IsRequired()
+                        .HasColumnType("integer[]");
 
                     b.Property<string>("CoupleName")
                         .HasColumnType("text");
@@ -88,6 +95,32 @@ namespace Infrastructure.Migrations
                     b.ToTable("Guests");
                 });
 
+            modelBuilder.Entity("Domain.Entities.Photo", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<long>("EventId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<long>("OwnerId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EventId")
+                        .IsUnique();
+
+                    b.ToTable("Photos");
+                });
+
             modelBuilder.Entity("Domain.Entities.Place", b =>
                 {
                     b.Property<long>("Id")
@@ -100,6 +133,9 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<double>("Longitude")
+                        .HasColumnType("double precision");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
@@ -110,6 +146,9 @@ namespace Infrastructure.Migrations
                     b.Property<string>("URL")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<double>("Width")
+                        .HasColumnType("double precision");
 
                     b.HasKey("Id");
 
@@ -138,9 +177,23 @@ namespace Infrastructure.Migrations
                     b.Navigation("Event");
                 });
 
+            modelBuilder.Entity("Domain.Entities.Photo", b =>
+                {
+                    b.HasOne("Domain.Entities.Event", "Event")
+                        .WithOne("Photo")
+                        .HasForeignKey("Domain.Entities.Photo", "EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Event");
+                });
+
             modelBuilder.Entity("Domain.Entities.Event", b =>
                 {
                     b.Navigation("Guests");
+
+                    b.Navigation("Photo")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Domain.Entities.Place", b =>

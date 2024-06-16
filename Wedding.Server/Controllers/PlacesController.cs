@@ -12,13 +12,13 @@ namespace Wedding.Server.Controllers;
 
 public class PlacesController(IMediator mediator) : BaseApiController(mediator)
 {
-    //[HttpGet("{id:long}")]
-    //[ProducesResponseType(typeof(BaseApiResponseModel<PlaceDto>), 200)]
-    //public async Task<IActionResult> GetEvent(long id)
-    //{
-    //    var result = await Mediator.Send(new GetGuestNameByIdQuery(id));
-    //    return FromResult(result);
-    //}
+    [HttpGet("{id:long}")]
+    [ProducesResponseType(typeof(BaseApiResponseModel<PlaceDto>), 200)]
+    public async Task<IActionResult> GetEvent(long id)
+    {
+        var result = await Mediator.Send(new GetPlaceByIdQuery(id));
+        return FromResult(result);
+    }
 
     [HttpGet("get-place-list")]
     [ProducesResponseType(typeof(BaseApiResponseModel<List<PlaceDto>>), 200)]

@@ -9,6 +9,8 @@ public class GuestConf : IEntityTypeConfiguration<Guest>
     {
         builder.HasKey(x => x.Id);
 
+        builder.Property(x => x.Alcohol).HasConversion<List<int>>();
+
         builder
             .HasOne(x => x.Event)
             .WithMany(x => x.Guests);
