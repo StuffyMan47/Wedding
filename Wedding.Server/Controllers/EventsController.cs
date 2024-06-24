@@ -1,5 +1,7 @@
-﻿using Application.DTO;
+﻿using Application.Common.ActionResult;
+using Application.DTO;
 using Application.Events.Commands.AddEvent;
+using Application.Events.Commands.Questionnaire;
 using Application.Events.Queries.GetEvent;
 using Application.Guests.Commands.AddGuest;
 using Application.Guests.Queries.GetGuestNames;
@@ -45,5 +47,13 @@ public class EventsController(IMediator mediator) : BaseApiController(mediator)
         var image = await Mediator.Send(new GetPhotoQuery(EventId));
         var result = File(image, "image/jpeg");
         return result;
+    }
+
+    [HttpPost("questionnaire")]
+    [ProducesResponseType(typeof(BaseApiResponseModel<Result>), 200)]
+    public async Task<IActionResult> Questionnaire(QuestionnaireCommand request)
+    {
+        var result = await Mediator.Send(request);
+        return FromResult(result);
     }
 }
