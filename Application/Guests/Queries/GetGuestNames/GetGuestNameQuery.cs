@@ -13,7 +13,7 @@ public class GetGuestNameQueryHandler(BaseServicePool baseServicePool) : IReques
     public async Task<Result<List<GuestDto>>> Handle(GetGuestNameQuery request, CancellationToken cancellationToken) 
     {
         var result = await baseServicePool.DbContext.Guests
-            .Select(x => new GuestDto { Id = x.Id, Name = x.Name, CoupleName = x.CoupleName, isCome = x.IsCome})
+            .Select(x => new GuestDto { Id = x.Id, Name = x.Name, CoupleName = x.CoupleName, isCome = x.IsCome ?? false})
             .ToListAsync(cancellationToken);
 
         return Result<List<GuestDto>>.Success(result);
