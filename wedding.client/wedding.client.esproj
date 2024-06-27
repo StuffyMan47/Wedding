@@ -9,9 +9,9 @@
     <BuildOutputFolder>$(MSBuildProjectDirectory)\dist</BuildOutputFolder>
   </PropertyGroup>
   <ItemGroup>
+    <Folder Include="src\entities\event\model\" />
     <Folder Include="src\entities\guest\api\" />
     <Folder Include="src\features\" />
-    <Folder Include="src\shared\api\" />
     <Folder Include="src\shared\hooks\" />
     <Folder Include="src\shared\ui\" />
   </ItemGroup>

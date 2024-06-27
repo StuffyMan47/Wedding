@@ -1,4 +1,4 @@
-export type GuestListModel = {
+export type GuestModel = {
     id: number;
     name: string;
     coupleName?: string;

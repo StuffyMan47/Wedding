@@ -5,17 +5,17 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { GuestListModel } from '../entities/guest/model/guest-model';
+import { GuestModel } from '../entities/guest/model/guest-model';
 import { useEffect, useState } from 'react';
 import '../app/styles/App.css'
 //import { List } from '@mui/material';
 
 interface Props {
-    data: Array<GuestListModel>;
+    data: Array<GuestModel>;
 }
 
 const MaterialTable: React.FC<Props> = ({ data }) => {
-    const [rows, setRows] = useState<Array<GuestListModel>>([]);
+    const [rows, setRows] = useState<Array<GuestModel>>([]);
 
     useEffect(() => {
         setRows(data);

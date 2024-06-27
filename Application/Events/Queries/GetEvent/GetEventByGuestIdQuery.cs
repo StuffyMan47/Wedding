@@ -18,9 +18,15 @@ public class GetEventByGuestIdQueryHandler(BaseServicePool baseServicePool) : IR
                 Date = x.Event.Date,
                 Description = x.Event.Description,
                 Newlyweds = x.Event.Newlyweds,
-                PlaseInfo = x.Event.Place,
+                PlaseInfo = new PlaceDto
+                {
+                    Address = x.Event.Place.Address,
+                    Name = x.Event.Place.Name,
+                    URL = x.Event.Place.URL,
+                    Longitude = x.Event.Place.Longitude,
+                    Width = x.Event.Place.Width
+                }
             }).FirstOrDefaultAsync();
-
         return Result<EventDto>.Success(result);
     }
 }

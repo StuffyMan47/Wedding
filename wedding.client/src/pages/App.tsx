@@ -4,16 +4,17 @@ import '../app/styles/App.css';
 import '../app/styles/table-css.css';
 import { ResponsiveAppBar } from '../widgets/Header';
 //import MaterialTable from '../widgets/Table';
-import { GuestListModel } from '../entities/guest/model/guest-model';
-import { useGuestList } from '../entities/guest/api/guest-list-api';
+import { GuestModel } from '../entities/guest/model/guest-model';
+import { useGuestList } from '../shared/api/guest-list-api';
 import { YMaps, Map, Placemark } from '@pbe/react-yandex-maps';
-//import { useCurrentEvent } from '../entities/guest/api/get-current-event-api';
+import { useCurrentEvent } from '../shared/api/get-current-event-api';
 import CountdownTimer from '../widgets/CountdownTimer';
 import CircleLine from '../widgets/Colors';
+import { EventModel, PlaceModel } from '../entities/event/model/event-model';
 
 
 
-const fakeData: GuestListModel[] = [
+const fakeData: GuestModel[] = [
     {
         id: 1,
         isCome: true,
@@ -32,11 +33,26 @@ const fakeData: GuestListModel[] = [
         name: 'Костя',
     }
 ]
+const fakePlace: PlaceModel = {
+    address: "some",
+    longitude: 54.296862,
+    width: 56.10123,
+    url: "https://vremenagodansk.ru/",
+    name: "Времена года",
+}
 
+const fakeEvent: EventModel = {
+    date: new Date(2024, 7, 3, 16, 0),
+    description: "fake",
+    id: 0,
+    newlyweds: "Марсель Гузель",
+    place: fakePlace
+}
 const date = new Date(2024, 7, 3, 16, 0);
 
 function App() {
-    const [guestList, setGuestList] = useState<GuestListModel[]>();
+    const [guestList, setGuestList] = useState<GuestModel[]>();
+    const [event, setEvent] = useState<EventModel>();
     const {
         data: guestListData,
         isLoading: isLoading,
@@ -44,16 +60,15 @@ function App() {
         //error: err,
     } = useGuestList();
     
-    //const {
-    //    data: eventInfo,
-    //    //isLoading: isLoading,
-    //    //isError: isFailed,
-    //    //error: err,
-    //} = useCurrentEvent(1);
+    const {
+        data: eventInfo,
+        //isLoading: isLoading,
+        //isError: isFailed,
+        //error: err,
+    } = useCurrentEvent(1);
 
 
     useEffect(() => {
-
         if (guestListData === undefined) {
             setGuestList(fakeData)
         }
@@ -61,6 +76,13 @@ function App() {
             setGuestList(guestListData.data)
         }
 
+        if (eventInfo === undefined) {
+            setEvent(fakeEvent)
+        }
+        else {
+            setEvent(eventInfo.data)
+        }
+        console.log(event);
     }, [guestList, isLoading]);
 
 
