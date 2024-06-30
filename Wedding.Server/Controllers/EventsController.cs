@@ -3,12 +3,10 @@ using Application.DTO;
 using Application.Events.Commands.AddEvent;
 using Application.Events.Commands.Questionnaire;
 using Application.Events.Queries.GetEvent;
-using Application.Guests.Commands.AddGuest;
-using Application.Guests.Queries.GetGuestNames;
 using Application.Photos.Queries.GetPhoto;
+using Application.Schedules.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Hosting;
 using Wedding.Server.Controllers.Base;
 using Wedding.Server.Models;
 
@@ -54,6 +52,14 @@ public class EventsController(IMediator mediator) : BaseApiController(mediator)
     public async Task<IActionResult> Questionnaire(QuestionnaireCommand request)
     {
         var result = await Mediator.Send(request);
+        return FromResult(result);
+    }
+
+    [HttpGet("get-schedule-list")]
+    [ProducesResponseType(typeof(BaseApiResponseModel<List<ScheduleDto>>), 200)]
+    public async Task<IActionResult> ScheduleList(long id)
+    {
+        var result = await Mediator.Send(new GetScheduleListQuery(id));
         return FromResult(result);
     }
 }

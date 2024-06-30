@@ -14,14 +14,10 @@ public class GetEventsListQueryHandler(BaseServicePool baseServicePool) : IReque
     {
         var result = await baseServicePool.DbContext.Events
             .Select(x => new EventDto
-            { Date = x.Date, Description = x.Description, Newlyweds = x.Newlyweds, 
-                PlaseInfo = new PlaceDto
-                    { Address = x.Place.Address,
-                    Name = x.Place.Name,
-                    URL = x.Place.URL,
-                    Longitude = x.Place.Longitude,
-                    Width = x.Place.Width
-                    }
+            { Date = x.Date, 
+                Description = x.Description, 
+                Newlyweds = x.Newlyweds, 
+                WelcomeSpeech = x.WelcomeSpeech,
             })
             .ToListAsync(cancellationToken);
 

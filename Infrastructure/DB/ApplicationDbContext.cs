@@ -10,6 +10,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     public DbSet<Guest> Guests { get; set; }
     public DbSet<Place> Places { get; set; }
     public DbSet<Photo> Photos { get; set; }
+    public DbSet<Schedule> Schedule { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

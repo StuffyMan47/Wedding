@@ -13,19 +13,13 @@ public class GetEventByGuestIdQueryHandler(BaseServicePool baseServicePool) : IR
     public async Task<Result<EventDto>> Handle(GetEventByGuestIdQuery request, CancellationToken cancellationToken) 
     {
         var result = await baseServicePool.DbContext.Guests
-            .Where(x=>x.Id==request.id)
-            .Select(x => new EventDto {
+            .Where(x => x.Id == request.id)
+            .Select(x => new EventDto
+            {
                 Date = x.Event.Date,
                 Description = x.Event.Description,
                 Newlyweds = x.Event.Newlyweds,
-                PlaseInfo = new PlaceDto
-                {
-                    Address = x.Event.Place.Address,
-                    Name = x.Event.Place.Name,
-                    URL = x.Event.Place.URL,
-                    Longitude = x.Event.Place.Longitude,
-                    Width = x.Event.Place.Width
-                }
+                WelcomeSpeech = x.Event.WelcomeSpeech,
             }).FirstOrDefaultAsync();
         return Result<EventDto>.Success(result);
     }
