@@ -10,6 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="src\entities\event\model\" />
+    <Folder Include="src\entities\enums\" />
     <Folder Include="src\entities\place\model\" />
     <Folder Include="src\features\" />
     <Folder Include="src\shared\hooks\" />

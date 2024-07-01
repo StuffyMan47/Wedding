@@ -12,11 +12,19 @@ import { PlaceModel } from '../entities/place/model/place-model';
 import { useCurrentPlace } from '../shared/api/get-current-place-api';
 import { usePhoto } from '../shared/api/get-photo-api';
 import EventForm from '../widgets/quest';
+import { GuestModel } from '../entities/guest/model/guest-model';
+import { useCurrentGuest } from '../shared/api/get-current-guest';
 
 function App() {
+    const [currentGuest, setCurrentGuest] = useState<GuestModel>();
     const [event, setEvent] = useState<EventModel>();
     const [place, setPlace] = useState<PlaceModel>();
     const [photo, setPhoto] = useState<string | null>(null);
+
+    const {
+        data: guestInfo,
+        isLoading: guestIsLoading,
+    } = useCurrentGuest(1);
 
     const {
         data: photoInfo,
@@ -36,6 +44,9 @@ function App() {
     } = useCurrentEvent(1);    
 
     useEffect(() => {
+        if (guestInfo !== undefined) {
+            setCurrentGuest(guestInfo.data)
+        }
         if (eventInfo !== undefined) {
             setEvent(eventInfo.data)
         }
@@ -44,16 +55,8 @@ function App() {
         }
         if (photoInfo !== undefined) {
             setPhoto(photoInfo)
-
-            //const base64Image = btoa(
-            //    new Uint8Array(photoInfo.data).reduce(
-            //        (data, byte) => data + String.fromCharCode(byte),
-            //        ''
-            //    )
-            //);
-            //setPhoto(`data:image/jpeg;base64,${base64Image}`);
         }
-    }, [eventIsLoading, plaseIsLoading, photoIsLoading]);
+    }, [guestIsLoading, eventIsLoading, plaseIsLoading, photoIsLoading]);
 
     useEffect(() => {
         console.log(event);
@@ -71,8 +74,10 @@ function App() {
                 )}
             </div>
             <div>
-                <h1 className="centered-text">Один день в этом году будет для нас особенным и мы хотим провести
-                    его в кругу близких и друзей. С большим удовольствием приглашаем вас на знаменательный праздник - нашу свадьбу!</h1>
+                {currentGuest && event ? (
+                    <h1 className="centered-text">{currentGuest?.name}, {event.description}</h1>
+                ) : (<p>Loading guest name...</p>)
+            }
             </div>
             {place !== undefined ? (
                 <YMaps>
@@ -90,14 +95,19 @@ function App() {
                 <h1>загрузка</h1>
             }
             {event !== undefined && (
-            <div>
                 <CountdownTimer targetDate={event.date} />
-            </div>
             )}
+            <div>
+                <a href="https://www.tinkoff.ru/cf/2gJnwiqwbiL">КопилОчка</a>
+            </div>
             <div>
                 <CircleLine colors={['#DDCEB1', '#D2B990', '#949B8B', '#455646', '#1D1D1B']} />
             </div>
-            <EventForm />
+            <div className="questionnaire">
+                {currentGuest ? (
+                    <EventForm guestId={currentGuest.id} />
+                ) : (<p>Loading guest name...</p>)}
+            </div>
         </>
     );
 }

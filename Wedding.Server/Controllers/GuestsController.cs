@@ -1,6 +1,7 @@
 ﻿using Application.DTO;
 using Application.Guests.Commands.AddGuest;
 using Application.Guests.Queries.GetGuestNames;
+using Application.Places.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Wedding.Server.Controllers.Base;
@@ -10,7 +11,7 @@ namespace Wedding.Server.Controllers
 {
     public class GuestsController(IMediator mediator) : BaseApiController(mediator)
     {
-        [HttpGet("get-guest{id:long}")]
+        [HttpGet("get-current-guest")]
         [ProducesResponseType(typeof(BaseApiResponseModel<GuestDto>), 200)]
         public async Task<IActionResult> GetName(long id) 
         {

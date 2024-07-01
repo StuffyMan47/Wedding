@@ -7,6 +7,7 @@ interface CountdownTimerProps {
 }
 
 const CountdownTimer: React.FC<CountdownTimerProps> = ({ targetDate }) => {
+
     const [timeLeft, setTimeLeft] = useState(
         differenceInSeconds(targetDate, new Date())
     );
