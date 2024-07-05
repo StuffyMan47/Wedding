@@ -1,5 +1,6 @@
 /* eslint-disable prefer-const */
 import { useEffect, useState } from 'react';
+import "../app/styles/index.css"
 import '../app/styles/App.css';
 import '../app/styles/table-css.css';
 import { ResponsiveAppBar } from '../widgets/Header';
@@ -14,12 +15,18 @@ import { usePhoto } from '../shared/api/get-photo-api';
 import EventForm from '../widgets/quest';
 import { GuestModel } from '../entities/guest/model/guest-model';
 import { useCurrentGuest } from '../shared/api/get-current-guest';
+import { schedule } from '../entities/event/model/schedule-model';
+import { useCurrentSchedule } from '../shared/api/get-schedule-api';
+import { ScheduleList } from '../widgets/Schedule';
+import { Container, Typography } from '@mui/material';
 
 function App() {
     const [currentGuest, setCurrentGuest] = useState<GuestModel>();
     const [event, setEvent] = useState<EventModel>();
     const [place, setPlace] = useState<PlaceModel>();
     const [photo, setPhoto] = useState<string | null>(null);
+    const [scheduleList, setSheduleList] = useState<schedule[]>()
+    const [isAllLoadingSuccess, setIsAllLoading] = useState<boolean>(false)
 
     const {
         data: guestInfo,
@@ -41,74 +48,69 @@ function App() {
         isLoading: eventIsLoading,
         //isError: isFailed,
         //error: err,
-    } = useCurrentEvent(1);    
+    } = useCurrentEvent(1);   
+
+    const {
+        data: scheduleInfo,
+        isLoading: scheduleIsLoading,
+    } = useCurrentSchedule(1);
 
     useEffect(() => {
-        if (guestInfo !== undefined) {
-            setCurrentGuest(guestInfo.data)
+        if (isAllLoadingSuccess) {
+            setCurrentGuest(guestInfo.data);
+            setEvent(eventInfo.data);
+            setPlace(placeInfo.data);
+            setPhoto(photoInfo!);
+            setSheduleList(scheduleInfo.data);
         }
-        if (eventInfo !== undefined) {
-            setEvent(eventInfo.data)
-        }
-        if (placeInfo !== undefined) {
-            setPlace(placeInfo.data)
-        }
-        if (photoInfo !== undefined) {
-            setPhoto(photoInfo)
-        }
-    }, [guestIsLoading, eventIsLoading, plaseIsLoading, photoIsLoading]);
+    }, [isAllLoadingSuccess]);
 
     useEffect(() => {
-        console.log(event);
-    }, [event]);
+        if (!(guestIsLoading || eventIsLoading || plaseIsLoading || photoIsLoading || scheduleIsLoading)) {
+            setIsAllLoading(true);
+        }
+    }, [guestIsLoading, eventIsLoading, plaseIsLoading, photoIsLoading, scheduleIsLoading]);
 
     return (
-        <><div>
-            <ResponsiveAppBar />
-        </div>
-            <div>
-                {photo ? (
-                    <img src={photo} alt="Fetched Image" className="main-image" />
-                ) : (
-                    <p>Loading image...</p>
-                )}
-            </div>
-            <div>
-                {currentGuest && event ? (
-                    <h1 className="centered-text">{currentGuest?.name}, {event.description}</h1>
-                ) : (<p>Loading guest name...</p>)
-            }
-            </div>
-            {place !== undefined ? (
-                <YMaps>
+        <Container maxWidth="sm">
+            {isAllLoadingSuccess ? (
+                <div className="container mx-auto">
+                    <ResponsiveAppBar />
                     <div>
-                        <Map
-                            defaultState={{ center: [place.width, place.longitude], zoom: 15, controls: ["zoomControl", "fullscreenControl"] }}
-                            style={{ width: '100%', height: '400px' }}
-                            modules={["control.ZoomControl", "control.FullscreenControl"]}
-                        >
-                            <Placemark modules={["geoObject.addon.balloon"]} geometry={[place.width, place.longitude]} properties={{ balloonContentBody: place.name }} />
-                        </Map>
+                        <img src={photo!} alt="Fetched Image" className="main-image" />
                     </div>
-                </YMaps>
-            ) :
-                <h1>загрузка</h1>
-            }
-            {event !== undefined && (
-                <CountdownTimer targetDate={event.date} />
-            )}
-            <div>
-                <a href="https://www.tinkoff.ru/cf/2gJnwiqwbiL">КопилОчка</a>
-            </div>
-            <div>
-                <CircleLine colors={['#DDCEB1', '#D2B990', '#949B8B', '#455646', '#1D1D1B']} />
-            </div>
-            <div className="questionnaire">
-                {currentGuest ? (
-                    <EventForm guestId={currentGuest.id} />
-                ) : (<p>Loading guest name...</p>)}
-            </div>
-        </>
+                    <div>
+                        <h1 className="centered-text">{currentGuest?.name}, {event?.description}</h1>
+                    </div>
+                    <YMaps>
+                        <div>
+                            <Map
+                                defaultState={{ center: [place?.width ?? 0, place?.longitude ?? 0], zoom: 15, controls: ["zoomControl", "fullscreenControl"] }}
+                                style={{ width: '100%', height: '400px' }}
+                                modules={["control.ZoomControl", "control.FullscreenControl"]}
+                            >
+                                <Placemark modules={["geoObject.addon.balloon"]} geometry={[place?.width, place?.longitude]} properties={{ balloonContentBody: place?.name }} />
+                            </Map>
+                        </div>
+                    </YMaps>
+                    {isAllLoadingSuccess ? (
+                        <ScheduleList scheduleList={scheduleList} />
+                    ) : (<p>laod</p>)}
+                    <CountdownTimer targetDate={event?.date ?? new Date()} />
+                    <div>
+                        <a href="https://www.tinkoff.ru/cf/2gJnwiqwbiL">Перейти в копилку</a>
+                    </div>
+                    <div>
+                        <Typography variant="h4" component="h2" gutterBottom>ДРЕСС-КОД</Typography>
+                        <CircleLine colors={['#DDCEB1', '#D2B990', '#949B8B', '#455646', '#1D1D1B']} />
+                        <Typography variant="h4" component="h2" gutterBottom>Для нас самое главное - ваше присутствие! Но мы будем очень благодарны, если поддержите цветовую гамму нашей свадбы.</Typography>
+                    </div>
+                    <div className="questionnaire">
+                        <EventForm guestId={currentGuest?.id ?? 0} />
+                    </div>
+                </div>
+            ) : (<p>Loading...</p>)}
+        </Container>
     );
 }
 

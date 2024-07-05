@@ -15,6 +15,9 @@ tr:nth-child(odd) {
     background: #FFF;
 }
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 body {
     font-family: 'Roboto', sans-serif;
@@ -31,4 +34,38 @@ tr:nth-child(even) {
 header {
     width: 100%;
     position: center;
+}
+
+.schedule-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.schedule-list-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.schedule-list-item-time {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.schedule-list-item-name {
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+.schedule-list-item-dot {
+    font-weight: bold;
+    font-size: 2em;
 }
