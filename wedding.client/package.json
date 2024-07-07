@@ -9,6 +9,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
+  "homepage": "./invite",
   "dependencies": {
     "-": "^0.0.1",
     "@pbe/react-yandex-maps": "^1.2.5",

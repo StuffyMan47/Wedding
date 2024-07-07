@@ -20,7 +20,12 @@ import { useCurrentSchedule } from '../shared/api/get-schedule-api';
 import { ScheduleList } from '../widgets/Schedule';
 import { Button, Container, Typography, useMediaQuery, useTheme } from '@mui/material';
 
-function App() {
+
+interface inviteProps {
+    id: number;
+}
+
+const App: React.FC<inviteProps> = ({ id }) => {
     const theme = useTheme();
     const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
     const isMediumScreen = useMediaQuery(theme.breakpoints.between('sm', 'md'));
@@ -35,29 +40,29 @@ function App() {
     const {
         data: guestInfo,
         isLoading: guestIsLoading,
-    } = useCurrentGuest(1);
+    } = useCurrentGuest(Number(id));
 
     const {
         data: photoInfo,
         isLoading: photoIsLoading,
-    } = usePhoto(1);
+    } = usePhoto(Number(id));
 
     const {
         data: placeInfo,
         isLoading: plaseIsLoading,
-    } = useCurrentPlace(1);
+    } = useCurrentPlace(Number(id));
 
     const {
         data: eventInfo,
         isLoading: eventIsLoading,
         //isError: isFailed,
         //error: err,
-    } = useCurrentEvent(1);   
+    } = useCurrentEvent(Number(id));   
 
     const {
         data: scheduleInfo,
         isLoading: scheduleIsLoading,
-    } = useCurrentSchedule(1);
+    } = useCurrentSchedule(Number(id));
 
     useEffect(() => {
         if (isAllLoadingSuccess) {
