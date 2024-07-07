@@ -3,6 +3,5 @@ import '../app/styles/index.css'
 import { Provider } from './Providers/index.tsx'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-    
     <Provider/>
 )

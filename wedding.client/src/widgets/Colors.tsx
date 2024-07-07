@@ -6,19 +6,20 @@ interface CircleProps {
 
 const CircleLine: React.FC<CircleProps> = ({ colors }) => {
     const circleStyle = {
-        width: '100px',
-        height: '100px',
+        width: '80px',
+        height: '80px',
         borderRadius: '50%',
         position: 'absolute',
     };
 
     const containerStyle = {
-        width: `${colors.length * 50}px`,
-        height: '100px',
+        width: `${ (colors.length+1) * 40}px`,
+        height: '80px',
         position: 'relative',
         margin: '0 auto',
         display: 'flex',
         alignItems: 'center',
+        justifyContent: 'center',
     };
 
     return (
@@ -29,7 +30,7 @@ const CircleLine: React.FC<CircleProps> = ({ colors }) => {
                     style={{
                         ...circleStyle,
                         backgroundColor: color,
-                        left: `${index * 50}px`,
+                        left: `${index * 40}px`,
                         zIndex: index + 1,
                     }}
                 />

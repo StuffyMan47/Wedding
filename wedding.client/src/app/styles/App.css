@@ -1,11 +1,8 @@
 ﻿#root {
-    max-width: 100%;
-    margin: 0 auto;
-    padding: 2rem;
     text-align: center;
 }
 .css-177gid-MuiTableCell-root {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Cormorant Infant', sans-serif;
 }
 tr:nth-child(even) {
     background: #F2F2F2;
@@ -19,12 +16,16 @@ tr:nth-child(odd) {
 @tailwind components;
 @tailwind utilities;
 
+.h4 {
+    font-family: 'Cormorant Infant', sans-serif;
+}
+
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Cormorant Infant', sans-serif;
 }
 
 .MuiTable-root {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Cormorant Infant', sans-serif;
 }
 
 tr:nth-child(even) {
@@ -36,16 +37,6 @@ header {
     position: center;
 }
 
-.schedule-list {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    box-sizing: border-box;
-}
 
 .schedule-list-item {
     display: flex;
@@ -58,14 +49,17 @@ header {
 .schedule-list-item-time {
     font-weight: bold;
     margin-right: 10px;
+    text-align: left;
 }
 
 .schedule-list-item-name {
     flex-grow: 1;
     margin-right: 10px;
+    text-align: center;
 }
 
 .schedule-list-item-dot {
     font-weight: bold;
     font-size: 2em;
+    text-align: right;
 }

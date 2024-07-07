@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import "../app/styles/index.css"
 import '../app/styles/App.css';
 import '../app/styles/table-css.css';
-import { ResponsiveAppBar } from '../widgets/Header';
+/*import { ResponsiveAppBar } from '../widgets/Header';*/
 import { YMaps, Map, Placemark } from '@pbe/react-yandex-maps';
 import { useCurrentEvent } from '../shared/api/get-current-event-api';
 import CountdownTimer from '../widgets/CountdownTimer';
@@ -12,15 +12,19 @@ import { EventModel } from '../entities/event/model/event-model';
 import { PlaceModel } from '../entities/place/model/place-model';
 import { useCurrentPlace } from '../shared/api/get-current-place-api';
 import { usePhoto } from '../shared/api/get-photo-api';
-import EventForm from '../widgets/quest';
+import EventForm from '../widgets/Questionnaire';
 import { GuestModel } from '../entities/guest/model/guest-model';
 import { useCurrentGuest } from '../shared/api/get-current-guest';
 import { schedule } from '../entities/event/model/schedule-model';
 import { useCurrentSchedule } from '../shared/api/get-schedule-api';
 import { ScheduleList } from '../widgets/Schedule';
-import { Container, Typography } from '@mui/material';
+import { Button, Container, Typography, useMediaQuery, useTheme } from '@mui/material';
 
 function App() {
+    const theme = useTheme();
+    const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+    const isMediumScreen = useMediaQuery(theme.breakpoints.between('sm', 'md'));
+
     const [currentGuest, setCurrentGuest] = useState<GuestModel>();
     const [event, setEvent] = useState<EventModel>();
     const [place, setPlace] = useState<PlaceModel>();
@@ -72,41 +76,137 @@ function App() {
     }, [guestIsLoading, eventIsLoading, plaseIsLoading, photoIsLoading, scheduleIsLoading]);
 
     return (
-        <Container maxWidth="sm">
+        <Container disableGutters maxWidth="sm" className="border-0">
             {isAllLoadingSuccess ? (
                 <div className="container mx-auto">
-                    <ResponsiveAppBar />
+                    {/*<ResponsiveAppBar />*/}
                     <div>
-                        <img src={photo!} alt="Fetched Image" className="main-image" />
+                        <img src={photo!} alt="Fetched Image" className="w-full h-auto object-cover" />
                     </div>
-                    <div>
-                        <h1 className="centered-text">{currentGuest?.name}, {event?.description}</h1>
+                    <div className="mt-20 mx-10">
+                        <Typography  style={{ fontFamily: "Cormorant Infant" }} className="font-cormorantInfant" variant="h4" component="h2" gutterBottom>ДОРОГИЕ ГОСТИ!</Typography>
+                        <Typography fontSize={isSmallScreen ? '1.5rem' : isMediumScreen ? '2.125rem' : '2.125rem'} style={{ fontFamily: "Times New Roman" }} variant="h4" component="h2" gutterBottom>{currentGuest?.name}, {event?.description}</Typography>
+                        <div className="mt-10">
+                            <Typography fontSize={isSmallScreen ? '1.5rem' : isMediumScreen ? '2.125rem' : '2.125rem'} style={{ fontFamily: "Times New Roman" }} variant="h4" component="h2" gutterBottom>Мы приглашаем вас разделить снами этот особенный день!</Typography>
+                        </div>
+                        <div className="my-10">
+                            <Typography fontSize={isSmallScreen ? '2.125rem' : isMediumScreen ? '2.5rem' : '2.5rem'} style={{ fontFamily: "Times New Roman" }} variant="h4" component="h2" gutterBottom>{event?.date ? new Date(event?.date).toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit', year: 'numeric' }) : 'загрузка'}</Typography>
+                        </div>
                     </div>
-                    <YMaps>
-                        <div>
+                    <div className="bg-backgroundGreen border-6 border-backgroundGreen">
+                        <div className="mt-10">
+                            <Typography style={{ fontFamily: "Cormorant Infant" }} className="font-cormorantInfant" variant="h4" component="h2" gutterBottom>ВРЕМЯ И МЕСТО<br />ТОРЖЕСТВА</Typography>
+                        </div>
+                        <div className="mt-6 mx-10">
+                            <Typography fontSize={isSmallScreen ? '1.5rem' : isMediumScreen ? '2.125rem' : '2.125rem'} style={{ fontFamily: "Times New Roman" }} variant="h4" component="h2" gutterBottom>Мы будем ждать вас по адресу:<br />г. Нефтекамск, ул. Янаульская 12</Typography>
+                        </div>
+                        <div className="mt-6 mx-10">
+                            <Typography fontSize={isSmallScreen ? '1.5rem' : isMediumScreen ? '2.125rem' : '2.125rem'} style={{ fontFamily: "Times New Roman" }} variant="h4" component="h2" gutterBottom>03 августа 2024 года в 16:30</Typography>
+                        </div>
+                        <div className="m-4">
+                            <YMaps>
                             <Map
                                 defaultState={{ center: [place?.width ?? 0, place?.longitude ?? 0], zoom: 15, controls: ["zoomControl", "fullscreenControl"] }}
                                 style={{ width: '100%', height: '400px' }}
-                                modules={["control.ZoomControl", "control.FullscreenControl"]}
-                            >
+                                modules={["control.ZoomControl", "control.FullscreenControl"]}>
                                 <Placemark modules={["geoObject.addon.balloon"]} geometry={[place?.width, place?.longitude]} properties={{ balloonContentBody: place?.name }} />
                             </Map>
+                            </YMaps>
                         </div>
-                    </YMaps>
+                    </div>
+                    <div className="mt-10 mx-8">
                     {isAllLoadingSuccess ? (
                         <ScheduleList scheduleList={scheduleList} />
-                    ) : (<p>laod</p>)}
-                    <CountdownTimer targetDate={event?.date ?? new Date()} />
-                    <div>
-                        <a href="https://www.tinkoff.ru/cf/2gJnwiqwbiL">Перейти в копилку</a>
+                        ) : (<p>laod</p>)}
                     </div>
                     <div>
-                        <Typography variant="h4" component="h2" gutterBottom>ДРЕСС-КОД</Typography>
-                        <CircleLine colors={['#DDCEB1', '#D2B990', '#949B8B', '#455646', '#1D1D1B']} />
-                        <Typography variant="h4" component="h2" gutterBottom>Для нас самое главное - ваше присутствие! Но мы будем очень благодарны, если поддержите цветовую гамму нашей свадбы.</Typography>
                     </div>
-                    <div className="questionnaire">
+                    <div className="mt-20">
+                        <img src={"./public/tort.png"} alt="Fetched Image" className="w-full h-auto object-cover" />
+                    </div>
+                    <div className="mt-20 mx-10">
+                        <Typography style={{ fontFamily: "Cormorant Infant" }} variant="h4" component="h2" gutterBottom>ДРЕСС-КОД</Typography>
+                        <div className="my-14">
+                            <CircleLine colors={['#DDCEB1', '#D2B990', '#949B8B', '#455646', '#1D1D1B']} />
+                        </div>
+                        <Typography fontSize={isSmallScreen ? '1.5rem' : isMediumScreen ? '2.125rem' : '2.125rem'} style={{ fontFamily: "Times New Roman" }} variant="h4" component="h2" gutterBottom>Для нас самое главное - ваше присутствие! Но мы будем очень благодарны, если поддержите цветовую гамму нашей свадбы.</Typography>
+                    </div>
+                    <div className="mt-20 mx-10">
+                        <Typography style={{ fontFamily: "Cormorant Infant" }} variant="h4" component="h2" gutterBottom>ДЕТАЛИ</Typography>
+                        <div className="my-10">
+                            <Typography fontSize={isSmallScreen ? '1.5rem' : isMediumScreen ? '2.125rem' : '2.125rem'} style={{ fontFamily: "Times New Roman" }} variant="h4" component="h2" gutterBottom>Цветы</Typography>
+                        </div>
+                        <div className="mx-10">
+                        <Typography fontSize={isSmallScreen ? '1.5rem' : isMediumScreen ? '2.125rem' : '2.125rem'} style={{ fontFamily: "Times New Roman", whiteSpace: "normal", overflowWrap: "break-word" }} variant="h4" component="h2" gutterBottom>Чтобы праздничное
+                            настроение длилось дольше,
+                            предлагаем не дарить нам
+                            цветы в день торжества, а эти
+                            средства перевести в копилку
+                            цветочной подписки. После
+                            свадьбы ваши цветы будут
+                                радовать нас долгое время.</Typography>
+                        </div>
+                        <div className="mt-10">
+                            <Button style={{ borderRadius: 20, backgroundColor: '#455646' }} variant="contained" href="https://www.tinkoff.ru/cf/2gJnwiqwbiL">Перейти в копилку</Button>
+                        </div>
+                    </div>
+                    <div className="my-10">
+                        <Typography style={{ fontFamily: "Cormorant Infant" }} variant="h4" component="h2" gutterBottom>***</Typography>
+                    </div>
+                    <Typography fontSize={isSmallScreen ? '1.5rem' : isMediumScreen ? '2.125rem' : '2.125rem'} style={{ fontFamily: "Times New Roman" }} variant="h4" component="h2" gutterBottom>Дорогие дамы</Typography>
+                    <div className="mt-8 mx-10">
+                        <Typography fontSize={isSmallScreen ? '1.5rem' : isMediumScreen ? '2.125rem' : '2.125rem'} style={{ fontFamily: "Times New Roman", whiteSpace: "normal", overflowWrap: "break-word" }} variant="h4" component="h2" gutterBottom>Учитывая, что часть
+                            мероприятия будет
+                            проходить на газоне, мы
+                            рекомендуем дамам
+                            выбрать удобную обувь
+                            без тонких шпилек.</Typography>
+                    </div>
+                    <div className="my-10">
+                        <Typography style={{ fontFamily: "Cormorant Infant" }} variant="h4" component="h2" gutterBottom>***</Typography>
+                    </div>
+                    <Typography fontSize={isSmallScreen ? '1.5rem' : isMediumScreen ? '2.125rem' : '2.125rem'} style={{ fontFamily: "Times New Roman" }} variant="h4" component="h2" gutterBottom>Небольшая просьба</Typography>
+                    <div className="my-8 mx-10">
+                        <Typography fontSize={isSmallScreen ? '1.5rem' : isMediumScreen ? '2.125rem' : '2.125rem'} style={{ fontFamily: "Times New Roman" }} variant="h4" component="h2" gutterBottom>От всего сердца просим вас
+                                воздержаться от криков
+                                «Горько!» и сохранить
+                                атмосферу уютного
+                                семейного праздника.</Typography>
+                        </div>
+                    <div className="mt-10 bg-backgroundGreen border-6 border-backgroundGreen">
+                    <div className="mt-8">
+                            <Typography style={{ fontFamily: "Cormorant Infant" }} variant="h4" component="h2" gutterBottom>АНКЕТА ГОСТЯ!</Typography>
+                        </div>
+                        <div className="my-8 mx-10">
+                            <Typography fontSize={isSmallScreen ? '1.5rem' : isMediumScreen ? '2.125rem' : '2.125rem'} style={{ fontFamily: "Times New Roman" }} variant="h4" component="h2" gutterBottom>Ваши ответы на вопросы
+                                очень помогут нам при
+                                организации свадьбы.
+                            </Typography>
+                        </div>
+                        <div className="mb-8">
+                            <Typography style={{ fontFamily: "Times New Roman" }} variant="h4" component="h2" gutterBottom>Будем ждать ответ<br/>
+                                до 15.07.2024 г.
+                            </Typography>
+                        </div>
                         <EventForm guestId={currentGuest?.id ?? 0} />
+                    </div>
+                    <div className="mt-20">
+                        <Typography style={{ fontFamily: "Cormorant Infant" }} variant="h4" component="h2" gutterBottom>ЧАТ ГОСТЕЙ</Typography>
+                        <div className="my-10 mx-10">
+                            <Typography fontSize={isSmallScreen ? '1.5rem' : isMediumScreen ? '2.125rem' : '2.125rem'} style={{ fontFamily: "Times New Roman" }} variant="h4" component="h2" gutterBottom>Телеграм-канал с новостями свадьбы, а также будем рады вашим фото и видео с торжества.</Typography>
+                        </div>
+                        <Button style={{ borderRadius: 20, backgroundColor: '#455646' }} variant="contained" href="https://t.me/+EynO91eROJhiYWIy">Присоедениться</Button>
+                    </div>
+                    <div className="my-20">
+                        <Typography style={{ fontFamily: "Cormorant Infant" }} variant="h4" component="h2" gutterBottom>ДО СВАДЬБЫ ОСТАЛОСЬ</Typography>
+                        {event ? (
+                            <CountdownTimer targetDate={event?.date} />
+                        ) : (<p>load</p>) }
+                    </div>
+                    <div className="my-8">
+                        <Typography style={{ fontFamily: "Cormorant Infant" }} variant="h4" component="h2" gutterBottom>МЫ ЖДЕМ ВАС!<br/>
+                            ВАШИ МАРСЕЛЬ И
+                            ГУЗЕЛЬ!</Typography>
                     </div>
                 </div>
             ) : (<p>Loading...</p>)}
