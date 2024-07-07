@@ -61,10 +61,10 @@ const EventForm: React.FC<GuestFormProps> = ({ guestId }) => {
             <div className="ml-16 mb-8">
                 <FormControl component="fieldset" className="w-full">
                     
-                <RadioGroup name="attending" value={formData.isCome} onChange={handleChange}>
-                    <FormControlLabel value={"true"} control={<Radio/>} label="Да" />
-                    <FormControlLabel value={"false"} control={<Radio/>} label="Нет" />
-                    <FormControlLabel value={"partner"} control={<Radio/>} label="Приду с парой" />
+                        <RadioGroup name="attending" value={formData.isCome} onChange={handleChange}>
+                            <FormControlLabel value={"solo"} control={<Radio />} label={<Typography style={{ fontFamily: "Times New Roman" }} variant="h5" component="h5" gutterBottom>Я приду</Typography> } />
+                            <FormControlLabel value={"couple"} control={<Radio />} label={<Typography style={{ fontFamily: "Times New Roman" }} variant="h5" component="h5" gutterBottom>Мы придём</Typography>} />
+                            <FormControlLabel value={"false"} control={<Radio />} label={<Typography style={{ fontFamily: "Times New Roman" }} variant="h5" component="h5" gutterBottom>Не приду</Typography>} />
                 </RadioGroup>
                 </FormControl>
                 <div>
@@ -92,7 +92,7 @@ const EventForm: React.FC<GuestFormProps> = ({ guestId }) => {
                                 onChange={handleChange}
                             />
                         }
-                        label="Шампанское"
+                                label={<Typography style={{ fontFamily: "Times New Roman" }} variant="h5" component="h5" gutterBottom>Шампанское</Typography>}
                     />
                     <FormControlLabel
                         control={
@@ -103,29 +103,7 @@ const EventForm: React.FC<GuestFormProps> = ({ guestId }) => {
                                 onChange={handleChange}
                             />
                         }
-                        label="Коньяк"
-                    />
-                    <FormControlLabel
-                        control={
-                            <Checkbox
-                                name="alcoholPreferences"
-                                value={alcohol.DryRedWine}
-                                checked={formData.alcohols.includes(alcohol.DryRedWine)}
-                                onChange={handleChange}
-                            />
-                        }
-                        label="Красное сухое вино"
-                    />
-                    <FormControlLabel
-                        control={
-                            <Checkbox
-                                name="alcoholPreferences"
-                                value={alcohol.DryWhiteWine}
-                                checked={formData.alcohols.includes(alcohol.DryWhiteWine)}
-                                onChange={handleChange}
-                            />
-                        }
-                        label="Белое сухое вино"
+                                label={<Typography style={{ fontFamily: "Times New Roman" }} variant="h5" component="h5" gutterBottom>Коньяк</Typography>}
                     />
                     <FormControlLabel
                         control={
@@ -136,7 +114,7 @@ const EventForm: React.FC<GuestFormProps> = ({ guestId }) => {
                                 onChange={handleChange}
                             />
                         }
-                        label="Красное полусладкое вино"
+                                label={<Typography style={{ fontFamily: "Times New Roman" }} variant="h5" component="h5" gutterBottom>Красное вино</Typography>}
                     />
                     <FormControlLabel
                         control={
@@ -147,7 +125,7 @@ const EventForm: React.FC<GuestFormProps> = ({ guestId }) => {
                                 onChange={handleChange}
                             />
                         }
-                        label="Белое полусладкое вино"
+                                label={<Typography style={{ fontFamily: "Times New Roman" }} variant="h5" component="h5" gutterBottom>Белое вино</Typography>}
                     />
                     <FormControlLabel
                         control={
@@ -158,8 +136,19 @@ const EventForm: React.FC<GuestFormProps> = ({ guestId }) => {
                                 onChange={handleChange}
                             />
                         }
-                        label="Водка"
+                                label={<Typography style={{ fontFamily: "Times New Roman" }} variant="h5" component="h5" gutterBottom>Водка</Typography>}
                     />
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        name="alcoholPreferences"
+                                        value={alcohol.Moonshine}
+                                        checked={formData.alcohols.includes(alcohol.Moonshine)}
+                                        onChange={handleChange}
+                                    />
+                                }
+                                label={<Typography style={{ fontFamily: "Times New Roman" }} variant="h5" component="h5" gutterBottom>Самогон</Typography>}
+                            />
                     <FormControlLabel
                         control={
                             <Checkbox
@@ -169,7 +158,7 @@ const EventForm: React.FC<GuestFormProps> = ({ guestId }) => {
                                 onChange={handleChange}
                             />
                         }
-                        label="Безалкогольное"
+                                label={<Typography style={{ fontFamily: "Times New Roman" }} variant="h5" component="h5" gutterBottom>Безалкогольное</Typography>}
                     />
                 </FormGroup>
                 </FormControl>

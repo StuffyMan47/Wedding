@@ -1,4 +1,6 @@
-﻿namespace Application.DTO;
+﻿using Domain.Enums;
+
+namespace Application.DTO;
 
 public class GuestDto
 {
@@ -6,4 +8,6 @@ public class GuestDto
     public string? CoupleName { get; set; }
     public required string Name { get; set; }
     public bool isCome { get; set; }
+    public MessageType MessageType { get; set; }
+    public List<Alcohol> alcohols { get; set; } = [];
 }

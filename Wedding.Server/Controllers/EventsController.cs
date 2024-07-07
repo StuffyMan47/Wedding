@@ -57,9 +57,9 @@ public class EventsController(IMediator mediator) : BaseApiController(mediator)
 
     [HttpGet("get-schedule-list")]
     [ProducesResponseType(typeof(BaseApiResponseModel<List<ScheduleDto>>), 200)]
-    public async Task<IActionResult> ScheduleList(long id)
+    public async Task<IActionResult> ScheduleList(long eventId)
     {
-        var result = await Mediator.Send(new GetScheduleListQuery(id));
+        var result = await Mediator.Send(new GetScheduleListQuery(eventId));
         return FromResult(result);
     }
 }

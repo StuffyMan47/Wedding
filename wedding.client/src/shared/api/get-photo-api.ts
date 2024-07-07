@@ -14,7 +14,7 @@ export const usePhoto = (id: number) => {
                 `https://localhost:44333/api/Events/get-photo`,
                 {
                     params: {
-                        EventId: id
+                        GuestId: id
                     },
                     responseType: 'blob' // Set the response type to 'blob'
                 }

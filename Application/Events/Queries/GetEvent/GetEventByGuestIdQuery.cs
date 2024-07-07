@@ -16,6 +16,7 @@ public class GetEventByGuestIdQueryHandler(BaseServicePool baseServicePool) : IR
             .Where(x => x.Id == request.id)
             .Select(x => new EventDto
             {
+                Id = x.Event.Id,
                 Date = x.Event.Date,
                 Description = x.Event.Description,
                 Newlyweds = x.Event.Newlyweds,

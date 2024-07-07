@@ -22,7 +22,7 @@ public class GetGuestNameByIdQueryHandler(BaseServicePool baseServicePool) : IRe
     public async Task<Result<GuestDto>> Handle(GetGuestNameByIdQuery query, CancellationToken cancellationToken)
     {
         var result = await baseServicePool.DbContext.Guests
-            .Select(x=> new GuestDto { Name = x.Name, Id = x.Id})
+            .Select(x=> new GuestDto { Name = x.Name, Id = x.Id, CoupleName = x.CoupleName, MessageType = x.MessageType })
             .FirstAsync(x => x.Id == query.id, cancellationToken: cancellationToken);
 
         return Result<GuestDto>.Success(result);

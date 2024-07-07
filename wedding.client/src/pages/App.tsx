@@ -19,6 +19,7 @@ import { schedule } from '../entities/event/model/schedule-model';
 import { useCurrentSchedule } from '../shared/api/get-schedule-api';
 import { ScheduleList } from '../widgets/Schedule';
 import { Button, Container, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { messageType } from '../entities/enums/messageType';
 
 
 interface inviteProps {
@@ -43,21 +44,21 @@ const App: React.FC<inviteProps> = ({ id }) => {
     } = useCurrentGuest(Number(id));
 
     const {
-        data: photoInfo,
-        isLoading: photoIsLoading,
-    } = usePhoto(Number(id));
-
-    const {
-        data: placeInfo,
-        isLoading: plaseIsLoading,
-    } = useCurrentPlace(Number(id));
-
-    const {
         data: eventInfo,
         isLoading: eventIsLoading,
         //isError: isFailed,
         //error: err,
     } = useCurrentEvent(Number(id));   
+
+    const {
+        data: photoInfo,
+        isLoading: photoIsLoading,
+    } = usePhoto(Number(event?.id));
+
+    const {
+        data: placeInfo,
+        isLoading: plaseIsLoading,
+    } = useCurrentPlace(Number(id));
 
     const {
         data: scheduleInfo,
@@ -80,6 +81,8 @@ const App: React.FC<inviteProps> = ({ id }) => {
         }
     }, [guestIsLoading, eventIsLoading, plaseIsLoading, photoIsLoading, scheduleIsLoading]);
 
+    console.log(currentGuest?.messageType)
+
     return (
         <Container disableGutters maxWidth="sm" className="border-0">
             {isAllLoadingSuccess ? (
@@ -88,9 +91,11 @@ const App: React.FC<inviteProps> = ({ id }) => {
                     <div>
                         <img src={photo!} alt="Fetched Image" className="w-full h-auto object-cover" />
                     </div>
-                    <div className="mt-20 mx-10">
-                        <Typography  style={{ fontFamily: "Cormorant Infant" }} className="font-cormorantInfant" variant="h4" component="h2" gutterBottom>ДОРОГИЕ ГОСТИ!</Typography>
-                        <Typography fontSize={isSmallScreen ? '1.5rem' : isMediumScreen ? '2.125rem' : '2.125rem'} style={{ fontFamily: "Times New Roman" }} variant="h4" component="h2" gutterBottom>{currentGuest?.name}, {event?.description}</Typography>
+                    <div className="mt-10 mx-10">
+                    <div className="my-10">
+                            <Typography style={{ fontFamily: "Cormorant Infant" }} className="font-cormorantInfant" variant="h4" component="h2" gutterBottom>{currentGuest?.messageType === messageType.many ? `Дорогие ${currentGuest?.name} и ${currentGuest?.coupleName}!`.toLocaleUpperCase() : currentGuest?.messageType === messageType.male ? `Дорогой ${currentGuest?.name}!`.toLocaleUpperCase() : `Дорогая ${currentGuest?.name}!`.toLocaleUpperCase()}</Typography>
+                        </div>
+                        <Typography fontSize={isSmallScreen ? '1.5rem' : isMediumScreen ? '2.125rem' : '2.125rem'} style={{ fontFamily: "Times New Roman" }} variant="h4" component="h2" gutterBottom>{event?.description}</Typography>
                         <div className="mt-10">
                             <Typography fontSize={isSmallScreen ? '1.5rem' : isMediumScreen ? '2.125rem' : '2.125rem'} style={{ fontFamily: "Times New Roman" }} variant="h4" component="h2" gutterBottom>Мы приглашаем вас разделить снами этот особенный день!</Typography>
                         </div>
@@ -102,7 +107,7 @@ const App: React.FC<inviteProps> = ({ id }) => {
                         <div className="mt-10">
                             <Typography style={{ fontFamily: "Cormorant Infant" }} className="font-cormorantInfant" variant="h4" component="h2" gutterBottom>ВРЕМЯ И МЕСТО<br />ТОРЖЕСТВА</Typography>
                         </div>
-                        <div className="mt-6 mx-10">
+                        <div className="mt-6 mx-8">
                             <Typography fontSize={isSmallScreen ? '1.5rem' : isMediumScreen ? '2.125rem' : '2.125rem'} style={{ fontFamily: "Times New Roman" }} variant="h4" component="h2" gutterBottom>Мы будем ждать вас по адресу:<br />г. Нефтекамск, ул. Янаульская 12</Typography>
                         </div>
                         <div className="mt-6 mx-10">
@@ -193,7 +198,7 @@ const App: React.FC<inviteProps> = ({ id }) => {
                                 до 15.07.2024 г.
                             </Typography>
                         </div>
-                        <EventForm guestId={currentGuest?.id ?? 0} />
+                        <EventForm guestId={id ?? 0} />
                     </div>
                     <div className="mt-20">
                         <Typography style={{ fontFamily: "Cormorant Infant" }} variant="h4" component="h2" gutterBottom>ЧАТ ГОСТЕЙ</Typography>

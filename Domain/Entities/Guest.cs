@@ -10,6 +10,7 @@ public class Guest: BaseEntity
     public string? CoupleName { get; set; }
     public long EventId { get; set; }
     public List<Alcohol>? Alcohol { get; set; } = [];
+    public MessageType MessageType { get; set; }
 
     public Event Event { get; set; }
 }

@@ -3,4 +3,5 @@ export type GuestModel = {
     name: string;
     coupleName?: string;
     isCome: boolean;
+    messageType: number;
 };

@@ -10,4 +10,5 @@ public enum Alcohol
     Cognac = 5,
     Vodka = 6,
     NoAlcohol = 7,
+    Moonshine = 8,
 }

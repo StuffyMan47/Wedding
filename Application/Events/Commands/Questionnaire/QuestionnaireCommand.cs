@@ -6,14 +6,14 @@ using MediatR;
 
 namespace Application.Events.Commands.Questionnaire;
 
-public record QuestionnaireCommand(long guestId, string? coupleName, bool isCome, List<Alcohol> alcohols) : IRequest<Result>;
+public record QuestionnaireCommand(long guestId, string? coupleName, string isCome, List<Alcohol> alcohols) : IRequest<Result>;
 
 public class QuestionnaireCommandValidator : AbstractValidator<QuestionnaireCommand>
 {
     public QuestionnaireCommandValidator()
     {
         RuleFor(x => x.alcohols).NotEmpty().WithName("Алкоголь");
-        RuleFor(x => x.isCome).NotEmpty().WithName("Место проведения");
+        RuleFor(x => x.isCome).NotEmpty().WithName("Статус");
     }
 }
 
@@ -29,9 +29,22 @@ public class QuestionnaireCommandHandler(BaseServicePool baseServicePool) : IReq
             return Result.Invalid().WithMessage("Гость не найден");
         }
 
+        bool isCome = false;
+        string? coupleName = null;
+
+        if (request.isCome.Equals("solo"))
+            isCome = true;
+        else if (request.isCome.Equals("couple"))
+        {
+            isCome = true;
+            coupleName = request.coupleName;
+        }
+        else if (request.isCome.Equals("false"))
+            isCome= false;
+
         currentGuest.Alcohol = request.alcohols;
-        currentGuest.CoupleName = request.coupleName;
-        currentGuest.IsCome = request.isCome;
+        currentGuest.CoupleName = coupleName;
+        currentGuest.IsCome = isCome;
         await baseServicePool.DbContext.SaveChangesAsync(cancellationToken);
 
         return Result.Success();

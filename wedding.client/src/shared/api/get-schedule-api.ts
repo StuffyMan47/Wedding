@@ -14,7 +14,7 @@ export const useCurrentSchedule = (id: number) => {
                 `https://localhost:44333/api/Events/get-schedule-list`,
                 {
                     params: {
-                        id: id
+                        eventId: id
                     }
                 }
             );

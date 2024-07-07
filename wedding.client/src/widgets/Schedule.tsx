@@ -12,7 +12,9 @@ export const ScheduleList: React.FC<scheduleProps> = ({ scheduleList }) => {
     const isMediumScreen = useMediaQuery(theme.breakpoints.between('sm', 'md'));
     return (
         <div className="schedule-list ">
-            <Typography  style={{ fontFamily: "Cormorant Infant", textAlign: "center" }} className="font-cormorantInfant" variant="h4" component="h2" gutterBottom>ПРОГРАММА ДНЯ</Typography>
+        <div className="my-8">
+                <Typography style={{ fontFamily: "Cormorant Infant", textAlign: "center" }} className="font-cormorantInfant" variant="h4" component="h2" gutterBottom>ПРОГРАММА ДНЯ</Typography>
+            </div>
             {scheduleList ? (
                 <List className="schedule-list">
                     {scheduleList.map((item, index) => (
