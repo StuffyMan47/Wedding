@@ -100,7 +100,7 @@ const App: React.FC<inviteProps> = ({ id }) => {
                             <Typography fontSize={isSmallScreen ? '1.5rem' : isMediumScreen ? '2.125rem' : '2.125rem'} style={{ fontFamily: "Times New Roman" }} variant="h4" component="h2" gutterBottom>Мы приглашаем вас разделить снами этот особенный день!</Typography>
                         </div>
                         <div className="my-10">
-                            <Typography fontSize={isSmallScreen ? '2.125rem' : isMediumScreen ? '2.5rem' : '2.5rem'} style={{ fontFamily: "Times New Roman" }} variant="h4" component="h2" gutterBottom>{event?.date ? new Date(event?.date).toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit', year: 'numeric' }) : 'загрузка'}</Typography>
+                            <Typography fontSize={isSmallScreen ? '2.125rem' : isMediumScreen ? '2.5rem' : '2.5rem'} style={{ fontFamily: "Cormorant Infant Bold" }} variant="h4" component="h2" gutterBottom>{event?.date ? new Date(event?.date).toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit', year: 'numeric' }) : 'загрузка'}</Typography>
                         </div>
                     </div>
                     <div className="bg-backgroundGreen border-6 border-backgroundGreen">
@@ -144,7 +144,7 @@ const App: React.FC<inviteProps> = ({ id }) => {
                     <div className="mt-20 mx-10">
                         <Typography style={{ fontFamily: "Cormorant Infant" }} variant="h4" component="h2" gutterBottom>ДЕТАЛИ</Typography>
                         <div className="my-10">
-                            <Typography fontSize={isSmallScreen ? '1.5rem' : isMediumScreen ? '2.125rem' : '2.125rem'} style={{ fontFamily: "Times New Roman" }} variant="h4" component="h2" gutterBottom>Цветы</Typography>
+                            <Typography fontSize={isSmallScreen ? '1.5rem' : isMediumScreen ? '2.125rem' : '2.125rem'} style={{ fontFamily: "Times New Roman Bold" }} variant="h4" component="h2" gutterBottom>Цветы</Typography>
                         </div>
                         <div className="mx-10">
                         <Typography fontSize={isSmallScreen ? '1.5rem' : isMediumScreen ? '2.125rem' : '2.125rem'} style={{ fontFamily: "Times New Roman", whiteSpace: "normal", overflowWrap: "break-word" }} variant="h4" component="h2" gutterBottom>Чтобы праздничное
@@ -163,7 +163,7 @@ const App: React.FC<inviteProps> = ({ id }) => {
                     <div className="my-10">
                         <Typography style={{ fontFamily: "Cormorant Infant" }} variant="h4" component="h2" gutterBottom>***</Typography>
                     </div>
-                    <Typography fontSize={isSmallScreen ? '1.5rem' : isMediumScreen ? '2.125rem' : '2.125rem'} style={{ fontFamily: "Times New Roman" }} variant="h4" component="h2" gutterBottom>Дорогие дамы</Typography>
+                    <Typography fontSize={isSmallScreen ? '1.5rem' : isMediumScreen ? '2.125rem' : '2.125rem'} style={{ fontFamily: "Times New Roman Bold" }} variant="h4" component="h2" gutterBottom>Дорогие дамы</Typography>
                     <div className="mt-8 mx-10">
                         <Typography fontSize={isSmallScreen ? '1.5rem' : isMediumScreen ? '2.125rem' : '2.125rem'} style={{ fontFamily: "Times New Roman", whiteSpace: "normal", overflowWrap: "break-word" }} variant="h4" component="h2" gutterBottom>Учитывая, что часть
                             мероприятия будет
@@ -175,7 +175,7 @@ const App: React.FC<inviteProps> = ({ id }) => {
                     <div className="my-10">
                         <Typography style={{ fontFamily: "Cormorant Infant" }} variant="h4" component="h2" gutterBottom>***</Typography>
                     </div>
-                    <Typography fontSize={isSmallScreen ? '1.5rem' : isMediumScreen ? '2.125rem' : '2.125rem'} style={{ fontFamily: "Times New Roman" }} variant="h4" component="h2" gutterBottom>Небольшая просьба</Typography>
+                    <Typography fontSize={isSmallScreen ? '1.5rem' : isMediumScreen ? '2.125rem' : '2.125rem'} style={{ fontFamily: "Times New Roman Bold" }} variant="h4" component="h2" gutterBottom>Небольшая просьба</Typography>
                     <div className="my-8 mx-10">
                         <Typography fontSize={isSmallScreen ? '1.5rem' : isMediumScreen ? '2.125rem' : '2.125rem'} style={{ fontFamily: "Times New Roman" }} variant="h4" component="h2" gutterBottom>От всего сердца просим вас
                                 воздержаться от криков

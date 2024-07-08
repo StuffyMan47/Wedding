@@ -28,36 +28,20 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({ targetDate }) => {
     return (
         <Grid container spacing={2} justifyContent="center">
             <Grid item>
-                <Typography variant="h4" component="div" style={{ fontFamily: "Cormorant Infant" }}>
-                    {days} *
-                </Typography>
-                <Typography variant="body1" component="div" style={{ textAlign: "center" }}>
-                   дней
-                </Typography>
+                <Typography variant="h4" component="div" style={{ fontFamily: "Cormorant Infant" }}>{days} *</Typography>
+                <Typography variant="body1" component="div" style={{ textAlign: "left" }}>дней</Typography>
             </Grid>
             <Grid item>
-                <Typography variant="h4" component="div" style={{ fontFamily: "Cormorant Infant" }}>
-                    {hours} *
-                </Typography>
-                <Typography variant="body1" component="div" style={{ textAlign: "center" }}>
-                    часов
-                </Typography>
+                <Typography variant="h4" component="div" style={{ fontFamily: "Cormorant Infant" }}>{hours} *</Typography>
+                <Typography variant="body1" component="div" style={{ textAlign: "left" }}>часов</Typography>
             </Grid>
             <Grid item>
-                <Typography variant="h4" component="div" style={{ fontFamily: "Cormorant Infant" }}>
-                    {minutes} *
-                </Typography>
-                <Typography variant="body1" component="div" style={{ textAlign: "center" }}>
-                    минут
-                </Typography>
+                <Typography variant="h4" component="div" style={{ fontFamily: "Cormorant Infant" }}>{minutes} *</Typography>
+                <Typography variant="body1" component="div" style={{ textAlign: "left" }}>минут</Typography>
             </Grid>
             <Grid item>
-                <Typography variant="h4" component="div" style={{ fontFamily: "Cormorant Infant" }}>
-                    {seconds}
-                </Typography>
-                <Typography variant="body1" component="div" style={{ textAlign: "center" }}>
-                    секунд
-                </Typography>
+                <Typography variant="h4" component="div" style={{ fontFamily: "Cormorant Infant" }}>{seconds}</Typography>
+                <Typography variant="body1" component="div" style={{ textAlign: "left" }}>секунд</Typography>
             </Grid>
         </Grid>
     );

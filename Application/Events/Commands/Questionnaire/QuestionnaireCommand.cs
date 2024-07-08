@@ -37,11 +37,14 @@ public class QuestionnaireCommandHandler(BaseServicePool baseServicePool) : IReq
         else if (request.isCome.Equals("couple"))
         {
             isCome = true;
-            coupleName = request.coupleName;
+            coupleName = currentGuest.CoupleName;
         }
         else if (request.isCome.Equals("false"))
-            isCome= false;
-
+        {
+            isCome = false;
+            coupleName = currentGuest.CoupleName;
+        }
+            
         currentGuest.Alcohol = request.alcohols;
         currentGuest.CoupleName = coupleName;
         currentGuest.IsCome = isCome;
