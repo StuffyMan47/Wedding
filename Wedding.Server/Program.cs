@@ -1,4 +1,5 @@
 using Application;
+using Infrastructure;
 using Infrastructure.DB;
 using Infrastructure.Services.Base;
 using Microsoft.AspNetCore.Hosting;
@@ -10,7 +11,7 @@ namespace Wedding.Server
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -27,16 +28,22 @@ namespace Wedding.Server
                     policy.AllowAnyMethod();
                 });
             });
-            builder.Services.AddDbContext<ApplicationDbContext>(
-                options =>
-                {
-                    options.UseNpgsql(builder.Configuration.GetConnectionString(nameof(ApplicationDbContext)));
-                });
+
+            //builder.Services.AddDbContext<ApplicationDbContext>(
+            //    options =>
+            //    {
+            //        options.UseNpgsql(builder.Configuration.GetConnectionString("DBConnectionString"));
+            //    });
 
 
             builder.Services.AddApplication();
+            builder.Services.AddDataAccessLayer(builder.Configuration);
 
             var app = builder.Build();
+
+            using var scope = app.Services.CreateScope();
+            using var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+            dbContext.Database.EnsureCreated();
 
             app.UseCors();
 
