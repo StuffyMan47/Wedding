@@ -20,6 +20,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{9A985769
 		C:\Users\Master\Downloads\IMG_9481.jpg = C:\Users\Master\Downloads\IMG_9481.jpg
 	EndProjectSection
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{92881E3C-03CC-4364-BE97-0B7DE5496646}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +50,10 @@ Global
 		{91EA8CBD-CF38-4D63-86BB-F12CB30083C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91EA8CBD-CF38-4D63-86BB-F12CB30083C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91EA8CBD-CF38-4D63-86BB-F12CB30083C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92881E3C-03CC-4364-BE97-0B7DE5496646}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92881E3C-03CC-4364-BE97-0B7DE5496646}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92881E3C-03CC-4364-BE97-0B7DE5496646}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92881E3C-03CC-4364-BE97-0B7DE5496646}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -58,6 +64,7 @@ Global
 		{8E9327C3-D6D2-46EC-BC7E-8A6DF63AA408} = {E000E557-9E81-4994-8BFD-FC56D0B201DB}
 		{91EA8CBD-CF38-4D63-86BB-F12CB30083C6} = {E000E557-9E81-4994-8BFD-FC56D0B201DB}
 		{9A985769-9EC5-4887-8637-3FFF81B313AA} = {E000E557-9E81-4994-8BFD-FC56D0B201DB}
+		{92881E3C-03CC-4364-BE97-0B7DE5496646} = {E000E557-9E81-4994-8BFD-FC56D0B201DB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ECCABA48-39EB-40BE-AB64-8E9FB457220E}

@@ -21,8 +21,6 @@ public static class DependencyInjection
                 .MigrationsAssembly(typeof(ApplicationDbContext).Assembly.ToString())
                 .MigrationsHistoryTable("__EFMigrationsHistory", "public")
                 );
-            options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTrackingWithIdentityResolution);
-            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", false);
         });
     }
 }

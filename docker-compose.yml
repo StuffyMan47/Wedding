@@ -1,0 +1,36 @@
+version: '3.4'
+
+networks:
+  wedding-dev:
+    driver: bridge
+
+services:
+  wedding.server:
+    image: ${DOCKER_REGISTRY-}weddingserver
+    environment:
+    - ASPNETCORE_ENVIRONMENT=Production
+    ports:
+    - "80:80"
+    build:
+      context: .
+      dockerfile: Wedding.Server/Dockerfile
+    networks:
+    - wedding-dev
+    depends_on:
+    - postgres
+  postgres:
+    image: postgres:16-alpine3.18
+    restart: always
+    environment:
+      POSTGRES_DB: "wedding"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "admin147456"
+    ports:
+      - "5432:5432"
+    networks:
+    - wedding-dev
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+  
+volumes:
+    postgres-data:

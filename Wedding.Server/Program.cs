@@ -29,21 +29,21 @@ namespace Wedding.Server
                 });
             });
 
-            //builder.Services.AddDbContext<ApplicationDbContext>(
-            //    options =>
-            //    {
-            //        options.UseNpgsql(builder.Configuration.GetConnectionString("DBConnectionString"));
-            //    });
+            builder.Services.AddDbContext<ApplicationDbContext>(
+                options =>
+                {
+                    options.UseNpgsql(builder.Configuration.GetConnectionString("DBConnectionString"));
+                });
 
 
             builder.Services.AddApplication();
-            builder.Services.AddDataAccessLayer(builder.Configuration);
+            //builder.Services.AddDataAccessLayer(builder.Configuration);
 
             var app = builder.Build();
 
             using var scope = app.Services.CreateScope();
-            using var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-            dbContext.Database.EnsureCreated();
+            await using var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+            await dbContext.Database.EnsureCreatedAsync();
 
             app.UseCors();
 
