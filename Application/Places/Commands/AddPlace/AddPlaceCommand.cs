@@ -6,7 +6,7 @@ using MediatR;
 
 namespace Application.Places.Commands.AddPlace;
 
-public record AddPlaceCommand(string Name, string Url, string Address, long OwnerId) : IRequest<Result>;
+public record AddPlaceCommand(string Name, string Url, string Address, long OwnerId, double Longitude, double Width) : IRequest<Result>;
 
 public class AddPlaceCommandValidator : AbstractValidator<AddPlaceCommand>
 {
@@ -22,7 +22,14 @@ public class AddPlaceCommandHandler(BaseServicePool baseServicePool) : IRequestH
 {
     public async Task<Result> Handle(AddPlaceCommand request, CancellationToken cancellationToken)
     {
-        var guest = new Place { Name = request.Name, Address = request.Address, URL = request.Url, OwnerId = request.OwnerId };
+        var guest = new Place { 
+            Name = request.Name, 
+            Address = request.Address, 
+            URL = request.Url, 
+            OwnerId = request.OwnerId,
+            Longitude= request.Longitude,
+            Width= request.Width,
+        };
         baseServicePool.DbContext.Places.Add(guest);
         await baseServicePool.DbContext.SaveChangesAsync(cancellationToken);
 

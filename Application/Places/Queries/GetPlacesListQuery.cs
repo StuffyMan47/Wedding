@@ -13,7 +13,7 @@ public class GetPlacesListQueryHandler(BaseServicePool baseServicePool) : IReque
     public async Task<Result<List<PlaceDto>>> Handle(GetPlacesListQuery request, CancellationToken cancellationToken)
     {
         var result = await baseServicePool.DbContext.Places
-            .Select(x => new PlaceDto { Name = x.Name, Address = x.Address, URL = x.URL })
+            .Select(x => new PlaceDto { Id = x.Id,  Name = x.Name, Address = x.Address, URL = x.URL, Longitude = x.Longitude, Width = x.Width })
             .ToListAsync(cancellationToken);
 
         return Result<List<PlaceDto>>.Success(result);
