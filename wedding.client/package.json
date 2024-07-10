@@ -12,13 +12,20 @@
   "homepage": "./invite",
   "dependencies": {
     "-": "^0.0.1",
+    "@emotion/react": "^11.11.4",
+    "@mui/icons-material": "^5.16.0",
+    "@mui/material": "^5.16.0",
+    "@mui/styled-engine": "^5.15.14",
     "@pbe/react-yandex-maps": "^1.2.5",
+    "@tanstack/react-query": "^5.50.1",
+    "@tanstack/react-query-devtools": "^5.50.1",
     "autoprefixer": "^10.4.19",
     "axios": "^1.7.2",
     "date-fns": "^3.6.0",
     "postcss": "^8.4.39",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.24.1"
   },
   "devDependencies": {
     "@types/node": "^20.11.0",

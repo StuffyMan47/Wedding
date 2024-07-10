@@ -15,7 +15,6 @@ const CircleLine: React.FC<CircleProps> = ({ colors }) => {
     const containerStyle = {
         width: `${ (colors.length+1) * 40}px`,
         height: '80px',
-        position: 'relative',
         margin: '0 auto',
         display: 'flex',
         alignItems: 'center',
@@ -29,6 +28,7 @@ const CircleLine: React.FC<CircleProps> = ({ colors }) => {
                     key={index}
                     style={{
                         ...circleStyle,
+                        position: "static",
                         backgroundColor: color,
                         left: `${index * 40}px`,
                         zIndex: index + 1,
