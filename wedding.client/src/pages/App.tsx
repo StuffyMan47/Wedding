@@ -11,7 +11,7 @@ import CircleLine from '../widgets/Colors';
 import { EventModel } from '../entities/event/model/event-model';
 import { PlaceModel } from '../entities/place/model/place-model';
 import { useCurrentPlace } from '../shared/api/get-current-place-api';
-import { usePhoto } from '../shared/api/get-photo-api';
+//import { usePhoto } from '../shared/api/get-photo-api';
 import EventForm from '../widgets/Questionnaire';
 import { GuestModel } from '../entities/guest/model/guest-model';
 import { useCurrentGuest } from '../shared/api/get-current-guest';
@@ -34,7 +34,7 @@ const App: React.FC<inviteProps> = ({ id }) => {
     const [currentGuest, setCurrentGuest] = useState<GuestModel>();
     const [event, setEvent] = useState<EventModel>();
     const [place, setPlace] = useState<PlaceModel>();
-    const [photo, setPhoto] = useState<string | null>(null);
+    //const [photo, setPhoto] = useState<string | null>(null);
     const [scheduleList, setSheduleList] = useState<schedule[]>()
     const [isAllLoadingSuccess, setIsAllLoading] = useState<boolean>(false)
 
@@ -50,10 +50,10 @@ const App: React.FC<inviteProps> = ({ id }) => {
         //error: err,
     } = useCurrentEvent(Number(id));   
 
-    const {
-        data: photoInfo,
-        isLoading: photoIsLoading,
-    } = usePhoto(Number(event?.id));
+    //const {
+    //    data: photoInfo,
+    //    isLoading: photoIsLoading,
+    //} = usePhoto(Number(event?.id));
 
     const {
         data: placeInfo,
@@ -70,16 +70,16 @@ const App: React.FC<inviteProps> = ({ id }) => {
             setCurrentGuest(guestInfo.data);
             setEvent(eventInfo.data);
             setPlace(placeInfo.data);
-            setPhoto(photoInfo!);
+/*            setPhoto(photoInfo!);*/
             setSheduleList(scheduleInfo.data);
         }
     }, [isAllLoadingSuccess]);
 
     useEffect(() => {
-        if (!(guestIsLoading || eventIsLoading || plaseIsLoading || photoIsLoading || scheduleIsLoading)) {
+        if (!(guestIsLoading || eventIsLoading || plaseIsLoading || scheduleIsLoading)) {
             setIsAllLoading(true);
         }
-    }, [guestIsLoading, eventIsLoading, plaseIsLoading, photoIsLoading, scheduleIsLoading]);
+    }, [guestIsLoading, eventIsLoading, plaseIsLoading, scheduleIsLoading]);
 
     console.log(currentGuest?.messageType)
 
@@ -89,7 +89,8 @@ const App: React.FC<inviteProps> = ({ id }) => {
                 <div className="container mx-auto">
                     {/*<ResponsiveAppBar />*/}
                     <div>
-                        <img src={photo!} alt="Fetched Image" className="w-full h-auto object-cover" />
+                        {/*<img src={photo!} alt="Fetched Image" className="w-full h-auto object-cover" />*/}
+                        <img src={"./public/main.png"} alt="Fetched Image" className="w-full h-auto object-cover" />
                     </div>
                     <div className="mt-10 mx-10">
                     <div className="my-10">
@@ -136,7 +137,7 @@ const App: React.FC<inviteProps> = ({ id }) => {
                     </div>
                     <div className="mt-20 mx-10">
                         <Typography style={{ fontFamily: "Cormorant Infant" }} variant="h4" component="h2" gutterBottom>ДРЕСС-КОД</Typography>
-                        <div className="my-14">
+                        <div className="my-14 self-center">
                             <CircleLine colors={['#DDCEB1', '#D2B990', '#949B8B', '#455646', '#1D1D1B']} />
                         </div>
                         <Typography fontSize={isSmallScreen ? '1.5rem' : isMediumScreen ? '2.125rem' : '2.125rem'} style={{ fontFamily: "Times New Roman" }} variant="h4" component="h2" gutterBottom>Для нас самое главное - ваше присутствие! Но мы будем очень благодарны, если поддержите цветовую гамму нашей свадбы.</Typography>

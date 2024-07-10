@@ -9,26 +9,24 @@ const CircleLine: React.FC<CircleProps> = ({ colors }) => {
         width: '80px',
         height: '80px',
         borderRadius: '50%',
-        position: 'absolute',
-    };
-
-    const containerStyle = {
-        width: `${ (colors.length+1) * 40}px`,
-        height: '80px',
-        margin: '0 auto',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
     };
 
     return (
-        <div style={containerStyle}>
+        <div style={{
+            width: `${(colors.length + 1) * 40}px`,
+            height: '80px',
+            margin: '0 auto',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            position: 'relative',
+        }} className="self-center">
             {colors.map((color, index) => (
                 <div
                     key={index}
                     style={{
                         ...circleStyle,
-                        position: "static",
+                        position: "absolute",
                         backgroundColor: color,
                         left: `${index * 40}px`,
                         zIndex: index + 1,

@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import instance from "./axios-conf";
 
 export const PlaceKeys = {
     root: ['photo'],
@@ -10,8 +10,8 @@ export const usePhoto = (id: number) => {
     return useQuery({
         queryKey: PlaceKeys.photo(id),
         queryFn: async () => {
-            const response = await axios.get(
-                `https://localhost:44333/api/Events/get-photo`,
+            const response = await instance.get(
+                `/api/Events/get-photo`,
                 {
                     params: {
                         GuestId: id

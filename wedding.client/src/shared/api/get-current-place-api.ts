@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import instance from "./axios-conf";
 
 export const PlaceKeys = {
     root: ['places'],
@@ -10,8 +10,8 @@ export const useCurrentPlace = (id: number) => {
     return useQuery({
         queryKey: PlaceKeys.currentPlace(),
         queryFn: async () => {
-            const { data } = await axios.get(
-                `https://localhost:44333/api/Places/get-current-place`,
+            const { data } = await instance.get(
+                `/api/Places/get-current-place`,
                 {
                     params: {
                         id: id

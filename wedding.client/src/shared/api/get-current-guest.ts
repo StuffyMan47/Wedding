@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import instance from "./axios-conf";
 
 export const GuestsKeys = {
     root: ['guests'],
@@ -10,8 +10,8 @@ export const useCurrentGuest = (id: number) => {
     return useQuery({
         queryKey: GuestsKeys.currentGuest(),
         queryFn: async () => {
-            const { data } = await axios.get(
-                `https://localhost:44333/api/Guests/get-current-guest`,
+            const { data } = await instance.get(
+                `/api/Guests/get-current-guest`,
                 {
                     params: {
                         id: id
