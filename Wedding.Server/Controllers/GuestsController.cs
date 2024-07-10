@@ -1,5 +1,6 @@
 ﻿using Application.DTO;
 using Application.Guests.Commands.AddGuest;
+using Application.Guests.Commands.AddGuestList;
 using Application.Guests.Queries.GetGuestNames;
 using Application.Places.Queries;
 using MediatR;
@@ -30,6 +31,14 @@ namespace Wedding.Server.Controllers
         [HttpPost("add-guest")]
         [ProducesResponseType(typeof(ApiResponseModel), 200)]
         public async Task<IActionResult> AddGuest(AddGuestCommand request)
+        {
+            var result = await Mediator.Send(request);
+            return FromResult(result);
+        }
+
+        [HttpPost("add-guest-list")]
+        [ProducesResponseType(typeof(ApiResponseModel), 200)]
+        public async Task<IActionResult> AddGuest(AddGuestListCommand request)
         {
             var result = await Mediator.Send(request);
             return FromResult(result);
