@@ -9,8 +9,7 @@ services:
     image: ${DOCKER_REGISTRY-}weddingserver
     environment:
     - ASPNETCORE_ENVIRONMENT=Production
-    ports:
-    - "80:80"
+    restart: always
     build:
       context: .
       dockerfile: Wedding.Server/Dockerfile
@@ -18,6 +17,18 @@ services:
     - wedding-dev
     depends_on:
     - postgres
+
+  client:
+    image: client
+    build: 
+        context: ./wedding.client
+        dockerfile: Dockerfile
+    # ports:
+    # - 5001:3000
+  proxy:
+    image: "nginx:mainline"
+
+
   postgres:
     image: postgres:16-alpine3.18
     restart: always
