@@ -23,8 +23,6 @@ services:
     build: 
         context: ./wedding.client
         dockerfile: Dockerfile
-    ports:
-    - 5001:3000
   # proxy:
   #   image: "nginx:mainline"
 
