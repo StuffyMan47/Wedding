@@ -10,8 +10,8 @@ EXPOSE 5173
 RUN npm install
 RUN npm install @rollup/rollup-linux-x64-musl
 #CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0", "--port", "5173"]
-#CMD ["npm", "run", "build"]
-CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "build"]
+CMD ["npx", "serve", "-s", "-l", "5173"]
 
 ## Step 2: Copy the built app to a new image 'production'
 #FROM node:lts-alpine AS production
