@@ -18,13 +18,19 @@ services:
     depends_on:
     - postgres
 
+
   client:
     image: client
     build: 
         context: ./wedding.client
         dockerfile: Dockerfile
-  # proxy:
-  #   image: "nginx:mainline"
+
+
+  proxy:
+    image: "nginx:mainline"
+    depends_on:
+        - wedding.server
+        - client
 
 
   postgres:
