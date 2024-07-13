@@ -17,6 +17,7 @@ services:
     - wedding-dev
     depends_on:
     - postgres
+    - proxy
 
 
   client:
@@ -28,9 +29,6 @@ services:
 
   proxy:
     image: "nginx:mainline"
-    depends_on:
-        - wedding.server
-        - client
 
 
   postgres:
