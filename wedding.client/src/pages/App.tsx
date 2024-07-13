@@ -20,6 +20,7 @@ import { useCurrentSchedule } from '../shared/api/get-schedule-api';
 import { ScheduleList } from '../widgets/Schedule';
 import { Button, Container, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { messageType } from '../entities/enums/messageType';
+import Footer from '../widgets/footer';
 
 
 interface inviteProps {
@@ -80,8 +81,6 @@ const App: React.FC<inviteProps> = ({ id }) => {
             setIsAllLoading(true);
         }
     }, [guestIsLoading, eventIsLoading, plaseIsLoading, scheduleIsLoading]);
-
-    console.log(currentGuest?.messageType)
 
     return (
         <Container disableGutters maxWidth="sm" className="border-0">
@@ -211,14 +210,17 @@ const App: React.FC<inviteProps> = ({ id }) => {
                     <div className="my-20">
                         <Typography style={{ fontFamily: "Cormorant Infant" }} variant="h4" component="h2" gutterBottom>ДО СВАДЬБЫ ОСТАЛОСЬ</Typography>
                         {event ? (
-                            <CountdownTimer targetDate={event?.date} />
+                            <div className="my-10">
+                                <CountdownTimer targetDate={event?.date} />
+                            </div>
                         ) : (<p>load</p>) }
                     </div>
-                    <div className="my-8">
+                    <div className="mb-20">
                         <Typography style={{ fontFamily: "Cormorant Infant" }} variant="h4" component="h2" gutterBottom>МЫ ЖДЕМ ВАС!<br/>
                             ВАШИ МАРСЕЛЬ И
                             ГУЗЕЛЬ!</Typography>
                     </div>
+                    <Footer/>
                 </div>
             ) : (<p>Loading...</p>)}
         </Container>
