@@ -14,9 +14,9 @@ export default defineConfig({
         }
     },
 /*    server: { host: false, port: 3000 },*/
-    preview: { open: true },
+    //preview: { open: true },
     server: {
-/*        host: '0.0.0.0',*/
+        host: true,
         port: 3000
     }
 })
