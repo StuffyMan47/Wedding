@@ -97,7 +97,7 @@ const App: React.FC<inviteProps> = ({ id }) => {
                         </div>
                         <Typography fontSize={isSmallScreen ? '1.5rem' : isMediumScreen ? '2.125rem' : '2.125rem'} style={{ fontFamily: "Times New Roman" }} variant="h4" component="h2" gutterBottom>{event?.description}</Typography>
                         <div className="mt-10">
-                            <Typography fontSize={isSmallScreen ? '1.5rem' : isMediumScreen ? '2.125rem' : '2.125rem'} style={{ fontFamily: "Times New Roman" }} variant="h4" component="h2" gutterBottom>Мы приглашаем вас разделить снами этот особенный день!</Typography>
+                            <Typography fontSize={isSmallScreen ? '1.5rem' : isMediumScreen ? '2.125rem' : '2.125rem'} style={{ fontFamily: "Times New Roman" }} variant="h4" component="h2" gutterBottom>Мы приглашаем вас разделить с нами этот особенный день!</Typography>
                         </div>
                         <div className="my-10">
                             <Typography fontSize={isSmallScreen ? '2.125rem' : isMediumScreen ? '2.5rem' : '2.5rem'} style={{ fontFamily: "Cormorant Infant Bold" }} variant="h4" component="h2" gutterBottom>{event?.date ? new Date(event?.date).toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit', year: 'numeric' }) : 'загрузка'}</Typography>
