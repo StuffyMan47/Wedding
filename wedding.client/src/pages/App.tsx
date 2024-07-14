@@ -20,7 +20,7 @@ import { useCurrentSchedule } from '../shared/api/get-schedule-api';
 import { ScheduleList } from '../widgets/Schedule';
 import { Button, Container, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { messageType } from '../entities/enums/messageType';
-import Footer from '../widgets/footer';
+//import Footer from '../widgets/footer';
 
 
 interface inviteProps {
@@ -220,7 +220,7 @@ const App: React.FC<inviteProps> = ({ id }) => {
                             ВАШИ МАРСЕЛЬ И
                             ГУЗЕЛЬ!</Typography>
                     </div>
-                    <Footer/>
+                {/*    <Footer/>*/}
                 </div>
             ) : (<p>Loading...</p>)}
         </Container>
