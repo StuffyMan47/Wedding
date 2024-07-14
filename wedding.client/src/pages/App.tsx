@@ -195,7 +195,7 @@ const App: React.FC<inviteProps> = ({ id }) => {
                         </div>
                         <div className="mb-8">
                             <Typography style={{ fontFamily: "Times New Roman" }} variant="h4" component="h2" gutterBottom>Будем ждать ответ<br/>
-                                до 15.07.2024 г.
+                                до 18.07.2024 г.
                             </Typography>
                         </div>
                         <EventForm guestId={id ?? 0} />
