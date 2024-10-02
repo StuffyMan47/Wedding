@@ -47,7 +47,7 @@ const EventForm: React.FC<GuestFormProps> = ({ guestId }) => {
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
-            const response = await axios.post('https://localhost:44333/api/Events/questionnaire', formData);
+            const response = await axios.post('http://185.178.46.58:5010/api/Events/questionnaire', formData);
             console.log('Response:', response.data);
         } catch (error) {
             console.error('Error:', error);

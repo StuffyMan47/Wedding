@@ -20,6 +20,7 @@ import { useCurrentSchedule } from '../shared/api/get-schedule-api';
 import { ScheduleList } from '../widgets/Schedule';
 import { Button, Container, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { messageType } from '../entities/enums/messageType';
+//import Footer from '../widgets/footer';
 
 
 interface inviteProps {
@@ -81,8 +82,6 @@ const App: React.FC<inviteProps> = ({ id }) => {
         }
     }, [guestIsLoading, eventIsLoading, plaseIsLoading, scheduleIsLoading]);
 
-    console.log(currentGuest?.messageType)
-
     return (
         <Container disableGutters maxWidth="sm" className="border-0">
             {isAllLoadingSuccess ? (
@@ -98,7 +97,7 @@ const App: React.FC<inviteProps> = ({ id }) => {
                         </div>
                         <Typography fontSize={isSmallScreen ? '1.5rem' : isMediumScreen ? '2.125rem' : '2.125rem'} style={{ fontFamily: "Times New Roman" }} variant="h4" component="h2" gutterBottom>{event?.description}</Typography>
                         <div className="mt-10">
-                            <Typography fontSize={isSmallScreen ? '1.5rem' : isMediumScreen ? '2.125rem' : '2.125rem'} style={{ fontFamily: "Times New Roman" }} variant="h4" component="h2" gutterBottom>Мы приглашаем вас разделить снами этот особенный день!</Typography>
+                            <Typography fontSize={isSmallScreen ? '1.5rem' : isMediumScreen ? '2.125rem' : '2.125rem'} style={{ fontFamily: "Times New Roman" }} variant="h4" component="h2" gutterBottom>Мы приглашаем вас разделить с нами этот особенный день!</Typography>
                         </div>
                         <div className="my-10">
                             <Typography fontSize={isSmallScreen ? '2.125rem' : isMediumScreen ? '2.5rem' : '2.5rem'} style={{ fontFamily: "Cormorant Infant Bold" }} variant="h4" component="h2" gutterBottom>{event?.date ? new Date(event?.date).toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit', year: 'numeric' }) : 'загрузка'}</Typography>
@@ -196,7 +195,7 @@ const App: React.FC<inviteProps> = ({ id }) => {
                         </div>
                         <div className="mb-8">
                             <Typography style={{ fontFamily: "Times New Roman" }} variant="h4" component="h2" gutterBottom>Будем ждать ответ<br/>
-                                до 15.07.2024 г.
+                                до 18.07.2024 г.
                             </Typography>
                         </div>
                         <EventForm guestId={id ?? 0} />
@@ -211,14 +210,17 @@ const App: React.FC<inviteProps> = ({ id }) => {
                     <div className="my-20">
                         <Typography style={{ fontFamily: "Cormorant Infant" }} variant="h4" component="h2" gutterBottom>ДО СВАДЬБЫ ОСТАЛОСЬ</Typography>
                         {event ? (
-                            <CountdownTimer targetDate={event?.date} />
+                            <div className="my-10">
+                                <CountdownTimer targetDate={event?.date} />
+                            </div>
                         ) : (<p>load</p>) }
                     </div>
-                    <div className="my-8">
+                    <div className="mb-20">
                         <Typography style={{ fontFamily: "Cormorant Infant" }} variant="h4" component="h2" gutterBottom>МЫ ЖДЕМ ВАС!<br/>
                             ВАШИ МАРСЕЛЬ И
                             ГУЗЕЛЬ!</Typography>
                     </div>
+                {/*    <Footer/>*/}
                 </div>
             ) : (<p>Loading...</p>)}
         </Container>
