@@ -20,11 +20,11 @@ services:
     - proxy
 
 
-  # client:
-  #   image: client
-  #   build: 
-  #       context: ./wedding.client
-  #       dockerfile: Dockerfile
+  client:
+    image: client
+    build: 
+        context: ./wedding.client
+        dockerfile: Dockerfile
 
 
   proxy:
