@@ -17,18 +17,18 @@ services:
     - wedding-dev
     depends_on:
     - postgres
-    - proxy
+  #   - proxy
 
 
-  client:
-    image: client
-    build: 
-        context: ./wedding.client
-        dockerfile: Dockerfile
+  # client:
+  #   image: client
+  #   build: 
+  #       context: ./wedding.client
+  #       dockerfile: Dockerfile
 
 
-  proxy:
-    image: "nginx:mainline"
+  # proxy:
+  #   image: "nginx:mainline"
 
 
   postgres:

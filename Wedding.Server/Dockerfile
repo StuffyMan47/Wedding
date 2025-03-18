@@ -19,7 +19,7 @@ COPY ["Wedding.Server/Wedding.Server.csproj", "Wedding.Server/"]
 COPY ["Application/Application.csproj", "Wedding.Server/"]
 COPY ["Infrastructure/Infrastructure.csproj", "Wedding.Server/"]
 COPY ["Domain/Domain.csproj", "Wedding.Server/"]
-COPY ["wedding.client/wedding.client.esproj", "wedding.client/"]
+#COPY ["wedding.client/wedding.client.esproj", "wedding.client/"]
 RUN dotnet restore "./Wedding.Server/Wedding.Server.csproj"
 COPY . .
 WORKDIR "/src/Wedding.Server"
