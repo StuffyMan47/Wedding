@@ -6,9 +6,6 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>882ef86d-143a-4b97-adc2-9c68f3ed8a28</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    <SpaRoot>..\wedding.client</SpaRoot>
-    <SpaProxyLaunchCommand>npm run dev</SpaProxyLaunchCommand>
-    <SpaProxyServerUrl>https://localhost:5173</SpaProxyServerUrl>
   </PropertyGroup>
 
   <ItemGroup>
