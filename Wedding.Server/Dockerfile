@@ -24,7 +24,6 @@ COPY ["Application/*.csproj", "Application/"]
 COPY ["Infrastructure/*.csproj", "Infrastructure/"]
 COPY ["Domain/*.csproj", "Domain/"]
 
-RUN dotnet restore
 # 2. Восстанавливаем зависимости
 RUN dotnet restore "Wedding.Server/Wedding.Server.csproj"
 
