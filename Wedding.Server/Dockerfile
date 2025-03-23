@@ -4,7 +4,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 USER app
 WORKDIR /app
 EXPOSE 5010
-RUN dotnet restore "Wedding.Server/Wedding.Server.csproj" --source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-public/nuget/v3/index.json
+
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS with-node
 RUN apt-get update && apt-get install -y ca-certificates
 RUN update-ca-certificates
@@ -15,7 +15,7 @@ COPY . .
 
 
 # Восстановление зависимостей
-#RUN dotnet restore "Wedding.Server/Wedding.Server.csproj"
+RUN dotnet restore "Wedding.Server/Wedding.Server.csproj"
 
 FROM with-node AS build
 ARG BUILD_CONFIGURATION=Release
