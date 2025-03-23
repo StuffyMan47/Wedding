@@ -9,6 +9,9 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS with-node
 RUN apt-get update && apt-get install -y ca-certificates
 RUN update-ca-certificates
 
+# Восстановление зависимостей
+RUN dotnet restore "Wedding.Server/Wedding.Server.csproj"
+
 FROM with-node AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
