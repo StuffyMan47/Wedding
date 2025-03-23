@@ -1,38 +1,44 @@
-#See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
-
+# Базовый образ для runtime
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 USER app
 WORKDIR /app
 EXPOSE 5010
 
+# Этап сборки с установкой зависимостей
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS with-node
-RUN apt-get update && apt-get install -y ca-certificates
-RUN update-ca-certificates
+RUN apt-get update && \
+    apt-get install -y ca-certificates tzdata && \
+    update-ca-certificates && \
+    rm -rf /var/lib/apt/lists/*
 
-# Копирование всех проектов
-WORKDIR /src
-COPY . .
-
-
-# Восстановление зависимостей
-RUN dotnet restore "Wedding.Server/Wedding.Server.csproj"
-
+# Этап восстановления зависимостей
 FROM with-node AS build
 ARG BUILD_CONFIGURATION=Release
+
 WORKDIR /src
-COPY ["Wedding.Server/Wedding.Server.csproj", "Wedding.Server/"]
-COPY ["Application/Application.csproj", "Wedding.Server/"]
-COPY ["Infrastructure/Infrastructure.csproj", "Wedding.Server/"]
-COPY ["Domain/Domain.csproj", "Wedding.Server/"]
-RUN dotnet restore "./Wedding.Server/Wedding.Server.csproj"
+
+# 1. Копируем ВСЕ .csproj файлы первыми
+COPY *.sln .
+COPY ["Wedding.Server/*.csproj", "Wedding.Server/"]
+COPY ["Application/*.csproj", "Application/"]
+COPY ["Infrastructure/*.csproj", "Infrastructure/"]
+COPY ["Domain/*.csproj", "Domain/"]
+
+# 2. Восстанавливаем зависимости
+RUN dotnet restore "Wedding.Server/Wedding.Server.csproj"
+
+# 3. Копируем остальные файлы
 COPY . .
+
+# 4. Сборка и публикация
 WORKDIR "/src/Wedding.Server"
-RUN dotnet build "./Wedding.Server.csproj" -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet build "Wedding.Server.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./Wedding.Server.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "Wedding.Server.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
+# Финальный образ
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
