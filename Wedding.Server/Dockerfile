@@ -14,7 +14,7 @@ WORKDIR /src
 COPY . .
 
 # Восстановление зависимостей
-RUN dotnet restore "Wedding.Server/Wedding.Server.csproj"
+#RUN dotnet restore "Wedding.Server/Wedding.Server.csproj"
 
 FROM with-node AS build
 ARG BUILD_CONFIGURATION=Release
