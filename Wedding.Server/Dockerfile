@@ -6,11 +6,7 @@ WORKDIR /app
 EXPOSE 5010
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS with-node
-RUN apt-get update && \
-    apt-get install -y curl && \
-    curl -sL https://deb.nodesource.com/setup_20.x | bash && \
-    apt-get install -y nodejs
-
+RUN apt-get update
 
 FROM with-node AS build
 ARG BUILD_CONFIGURATION=Release
@@ -19,7 +15,6 @@ COPY ["Wedding.Server/Wedding.Server.csproj", "Wedding.Server/"]
 COPY ["Application/Application.csproj", "Wedding.Server/"]
 COPY ["Infrastructure/Infrastructure.csproj", "Wedding.Server/"]
 COPY ["Domain/Domain.csproj", "Wedding.Server/"]
-COPY ["wedding.client/wedding.client.esproj", "wedding.client/"]
 RUN dotnet restore "./Wedding.Server/Wedding.Server.csproj"
 COPY . .
 WORKDIR "/src/Wedding.Server"

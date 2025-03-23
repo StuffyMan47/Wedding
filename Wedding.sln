@@ -5,8 +5,6 @@ VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wedding.Server", "Wedding.Server\Wedding.Server.csproj", "{687872E6-6037-4530-A44B-65DB6D908DBE}"
 EndProject
-Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "wedding.client", "wedding.client\wedding.client.esproj", "{6C13AD58-BD63-4FD3-9432-A5C2C5030D05}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Back", "Back", "{E000E557-9E81-4994-8BFD-FC56D0B201DB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{655A9A34-40DB-47DC-9FCC-FE89FB40522F}"
@@ -17,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{9A985769-9EC5-4887-8637-3FFF81B313AA}"
 	ProjectSection(SolutionItems) = preProject
-		C:\Users\Master\Downloads\IMG_9481.jpg = C:\Users\Master\Downloads\IMG_9481.jpg
+		..\..\..\..\Downloads\IMG_9481.jpg = ..\..\..\..\Downloads\IMG_9481.jpg
 	EndProjectSection
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{92881E3C-03CC-4364-BE97-0B7DE5496646}"
@@ -32,12 +30,6 @@ Global
 		{687872E6-6037-4530-A44B-65DB6D908DBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{687872E6-6037-4530-A44B-65DB6D908DBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{687872E6-6037-4530-A44B-65DB6D908DBE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6C13AD58-BD63-4FD3-9432-A5C2C5030D05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6C13AD58-BD63-4FD3-9432-A5C2C5030D05}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6C13AD58-BD63-4FD3-9432-A5C2C5030D05}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{6C13AD58-BD63-4FD3-9432-A5C2C5030D05}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6C13AD58-BD63-4FD3-9432-A5C2C5030D05}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6C13AD58-BD63-4FD3-9432-A5C2C5030D05}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{655A9A34-40DB-47DC-9FCC-FE89FB40522F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{655A9A34-40DB-47DC-9FCC-FE89FB40522F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{655A9A34-40DB-47DC-9FCC-FE89FB40522F}.Release|Any CPU.ActiveCfg = Release|Any CPU
