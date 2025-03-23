@@ -17,8 +17,6 @@ ARG BUILD_CONFIGURATION=Release
 
 WORKDIR /src
 
-# Копируем конфигурацию NuGet (если есть)
-COPY ["NuGet.Config", "./"]
 
 # 1. Копируем ВСЕ .csproj файлы первыми
 COPY *.sln .
