@@ -17,6 +17,9 @@ ARG BUILD_CONFIGURATION=Release
 
 WORKDIR /src
 
+# Копируем конфигурацию NuGet (если есть)
+COPY ["NuGet.Config", "./"]
+
 # 1. Копируем ВСЕ .csproj файлы первыми
 COPY *.sln .
 COPY ["Wedding.Server/*.csproj", "Wedding.Server/"]
@@ -25,7 +28,7 @@ COPY ["Infrastructure/*.csproj", "Infrastructure/"]
 COPY ["Domain/*.csproj", "Domain/"]
 
 # 2. Восстанавливаем зависимости
-RUN dotnet restore "Wedding.Server/Wedding.Server.csproj"
+RUN dotnet restore "Wedding.Server/Wedding.Server.csproj" -s https://api.nuget.org/v3/index.json
 
 # 3. Копируем остальные файлы
 COPY . .
