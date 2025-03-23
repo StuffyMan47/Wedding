@@ -6,7 +6,8 @@ WORKDIR /app
 EXPOSE 5010
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS with-node
-RUN apt-get update
+RUN apt-get update && apt-get install -y ca-certificates
+RUN update-ca-certificates
 
 FROM with-node AS build
 ARG BUILD_CONFIGURATION=Release
