@@ -26,7 +26,7 @@ COPY ["Infrastructure/*.csproj", "Infrastructure/"]
 COPY ["Domain/*.csproj", "Domain/"]
 
 # 2. Восстанавливаем зависимости
-RUN dotnet restore "Wedding.Server/Wedding.Server.csproj" # -s https://api.nuget.org/v3/index.json
+# RUN dotnet restore "Wedding.Server/Wedding.Server.csproj" # -s https://api.nuget.org/v3/index.json
 
 # 3. Копируем остальные файлы
 COPY . .
